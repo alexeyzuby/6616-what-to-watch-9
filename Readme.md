@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Алексей Зубарев](https://up.htmlacademy.ru/react/9/user/6616).
-* Наставник: `Неизвестно`.
+* Наставник: [Rail Sakhaviev](https://up.htmlacademy.ru/react/9/user/1331891).
 
 ---
 
