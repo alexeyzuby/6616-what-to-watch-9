@@ -7,6 +7,11 @@ export enum AppRoute {
   Player = '/player/:id',
 }
 
+export enum LayoutPlace {
+  Header = 'HEADER',
+  Footer = 'FOOTER',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
