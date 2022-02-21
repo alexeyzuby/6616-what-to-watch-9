@@ -1,5 +1,5 @@
 import React from 'react';
-import FilmCard from '../film-card/film-card';
+import FilmCard from '../../components/film-card/film-card';
 
 type MainProps = {
   promo: {
