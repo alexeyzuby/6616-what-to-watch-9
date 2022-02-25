@@ -1,5 +1,4 @@
 import React from 'react';
-import {LayoutPlace} from '../../const';
 import Logo from '../../components/logo/logo';
 
 function Film(): JSX.Element {
@@ -14,7 +13,7 @@ function Film(): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo location={LayoutPlace.Header}/>
+            <Logo/>
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -139,7 +138,7 @@ function Film(): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo location={LayoutPlace.Footer}/>
+          <Logo className="logo__link--light"/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

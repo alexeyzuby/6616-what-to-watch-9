@@ -1,4 +1,3 @@
-import {LayoutPlace} from '../../const';
 import Logo from '../../components/logo/logo';
 
 function AddReview(): JSX.Element {
@@ -12,7 +11,7 @@ function AddReview(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <Logo location={LayoutPlace.Header}/>
+          <Logo/>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
