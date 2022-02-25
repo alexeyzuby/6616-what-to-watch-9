@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
 
-function SignIn(): JSX.Element {
+function SignInScreen(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -38,4 +38,4 @@ function SignIn(): JSX.Element {
   );
 }
 
-export default SignIn;
+export default SignInScreen;

@@ -1,21 +1,18 @@
 import React from 'react';
+import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
-import FilmCard from '../../components/film-card/film-card';
+import FilmsList from '../../components/films-list/films-list';
 
-type MainProps = {
+type MainScreenProps = {
   promo: {
     title: string,
     genre: string,
     year: string,
   },
-  films: {
-    id: number,
-    image: string,
-    title: string,
-  }[],
+  films: Film[],
 }
 
-function Main({promo, films}: MainProps): JSX.Element {
+function MainScreen({promo, films}: MainScreenProps): JSX.Element {
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -137,9 +134,7 @@ function Main({promo, films}: MainProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {films.map((film) => <FilmCard key={film.id} film={film}/>)}
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -158,4 +153,4 @@ function Main({promo, films}: MainProps): JSX.Element {
   );
 }
 
-export default Main;
+export default MainScreen;
