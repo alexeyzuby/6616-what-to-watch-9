@@ -1,22 +1,18 @@
 import React from 'react';
-import {LayoutPlace} from '../../const';
+import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
-import FilmCard from '../../components/film-card/film-card';
+import FilmsList from '../../components/films-list/films-list';
 
-type MainProps = {
+type MainScreenProps = {
   promo: {
     title: string,
     genre: string,
     year: string,
   },
-  films: {
-    id: number,
-    image: string,
-    title: string,
-  }[],
+  films: Film[],
 }
 
-function Main({promo, films}: MainProps): JSX.Element {
+function MainScreen({promo, films}: MainScreenProps): JSX.Element {
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -55,7 +51,7 @@ function Main({promo, films}: MainProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <Logo location={LayoutPlace.Header}/>
+          <Logo/>
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -138,9 +134,7 @@ function Main({promo, films}: MainProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {films.map((film) => <FilmCard key={film.id} film={film}/>)}
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -148,7 +142,7 @@ function Main({promo, films}: MainProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo location={LayoutPlace.Footer}/>
+          <Logo className="logo__link--light"/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
@@ -159,4 +153,4 @@ function Main({promo, films}: MainProps): JSX.Element {
   );
 }
 
-export default Main;
+export default MainScreen;

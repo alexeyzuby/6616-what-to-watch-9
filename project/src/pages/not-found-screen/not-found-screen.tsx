@@ -1,12 +1,11 @@
 import {Link} from 'react-router-dom';
-import {LayoutPlace} from '../../const';
 import Logo from '../../components/logo/logo';
 
-function NotFound(): JSX.Element {
+function NotFoundScreen(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <Logo location={LayoutPlace.Header}/>
+        <Logo/>
 
         <h1 className="page-title user-page__title">404. Not Found</h1>
       </header>
@@ -17,7 +16,7 @@ function NotFound(): JSX.Element {
       </div>
 
       <footer className="page-footer">
-        <Logo location={LayoutPlace.Footer}/>
+        <Logo className="logo__link--light"/>
 
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>
@@ -27,4 +26,4 @@ function NotFound(): JSX.Element {
   );
 }
 
-export default NotFound;
+export default NotFoundScreen;
