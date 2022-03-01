@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
+import FilmPreview from '../film-preview/film-preview';
 
 type FilmCardProps = {
   film: Film,
@@ -15,7 +16,7 @@ function FilmCard({film, isActive, onHover}: FilmCardProps): JSX.Element {
       onMouseLeave={() => onHover(null)}
     >
       <div className="small-film-card__image">
-        <img src={film.previewImage} alt={film.name} width="280" height="175"/>
+        <FilmPreview src={film.previewVideoLink} poster={film.previewImage} isActive={isActive} isMuted/>
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${film.id}`}>
