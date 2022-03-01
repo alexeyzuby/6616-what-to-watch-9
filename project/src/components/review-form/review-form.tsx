@@ -7,19 +7,6 @@ function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
-  const ratingStars: JSX.Element[] = Array(MAX_SCORE);
-
-  for (let i = MAX_SCORE; i > 0; --i) {
-    ratingStars[MAX_SCORE - i] = (
-      <RatingInput
-        key={i}
-        value={i}
-        checked={i === rating}
-        onChange={(value) => setRating(value)}
-      />
-    );
-  }
-
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     {/* Пока временно обезвредим форму */}
     evt.preventDefault();
@@ -29,7 +16,14 @@ function ReviewForm(): JSX.Element {
     <form action="#" className="add-review__form" onSubmit={submitHandler}>
       <div className="rating">
         <div className="rating__stars">
-          {ratingStars}
+          {Array.from(Array(MAX_SCORE), (element, index) => (
+            <RatingInput
+              key={index + 1}
+              value={index + 1}
+              checked={index + 1 === rating}
+              onChange={(value) => setRating(value)}
+            />
+          )).reverse()}
         </div>
       </div>
 
