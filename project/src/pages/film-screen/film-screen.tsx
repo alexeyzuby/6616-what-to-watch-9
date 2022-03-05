@@ -2,6 +2,7 @@ import {Fragment, MouseEvent} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
+import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
@@ -22,8 +23,6 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
     evt.preventDefault();
     navigate(`/player/${currentFilm.id}`);
   };
-
-  const filmStarring = currentFilm.starring.join(', ');
 
   return (
     <Fragment>
@@ -84,33 +83,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{currentFilm.scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{currentFilm.description}</p>
-                <p className="film-card__director"><strong>Director: {currentFilm.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {filmStarring} and other</strong></p>
-              </div>
+              <FilmTabs film={currentFilm}/>
             </div>
           </div>
         </div>
