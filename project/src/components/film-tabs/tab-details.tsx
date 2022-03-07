@@ -32,7 +32,7 @@ function TabDetails({film}: TabDetailsProps): JSX.Element {
               return (
                 <Fragment key={star}>
                   {`${star}${newLine ? ',' : ''}`}
-                  {newLine ? <br/> : ''}
+                  {newLine && <br/>}
                 </Fragment>
               );
             })}
