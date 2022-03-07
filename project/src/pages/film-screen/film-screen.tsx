@@ -3,7 +3,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import FilmTabs from '../../components/film-tabs/film-tabs';
-import FilmsList from '../../components/films-list/films-list';
+import SimilarFilms from '../../components/similar-films/similar-films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type FilmScreenProps = {
@@ -91,9 +91,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <FilmsList films={films}/>
+          <SimilarFilms films={films} filmGenre={currentFilm.genre} filmId={currentFilm.id}/>
         </section>
 
         <footer className="page-footer">
