@@ -1,25 +1,23 @@
-import {Fragment, useState} from 'react';
+import {useState} from 'react';
 import {Film} from '../../types/film';
 import FilmCard from '../film-card/film-card';
 
-const MAX_SIMILAR_COUNT = 4;
-
 type SimilarFilmsProps = {
   films: Film[],
-  filmGenre: string,
-  filmId: number,
 };
 
-function SimilarFilms({films, filmGenre, filmId}: SimilarFilmsProps): JSX.Element {
+function SimilarFilms({films}: SimilarFilmsProps): JSX.Element {
   const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
-  const filmsList = films.filter((film) => film.genre === filmGenre && film.id !== filmId);
+
+  if (films.length === 0) {
+    return <p>No similar films...</p>;
+  }
 
   return (
-    <Fragment>
-      {filmsList.length > 0 && <h2 className="catalog__title">More like this</h2>}
-
+    <>
+      <h2 className="catalog__title">More like this</h2>
       <div className="catalog__films-list">
-        {filmsList.slice(0, MAX_SIMILAR_COUNT).map((film) => (
+        {films.map((film) => (
           <FilmCard
             key={film.id}
             film={film}
@@ -28,7 +26,7 @@ function SimilarFilms({films, filmGenre, filmId}: SimilarFilmsProps): JSX.Elemen
           />
         ))}
       </div>
-    </Fragment>
+    </>
   );
 }
 

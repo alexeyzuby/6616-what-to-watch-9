@@ -1,9 +1,9 @@
-import {Fragment, MouseEvent, useState} from 'react';
+import {MouseEvent, useState} from 'react';
 import {reviews} from '../../mocks/reviews';
 import {Film} from '../../types/film';
-import TabOverview from './tab-overview';
-import TabDetails from './tab-details';
-import TabReviews from './tab-reviews';
+import OverviewTab from './overview-tab';
+import DetailsTab from './details-tab';
+import ReviewsTab from './reviews-tab';
 
 type FilmTabsProps = {
   film: Film;
@@ -23,22 +23,8 @@ function FilmTabs({film}: FilmTabsProps) {
     setCurrent(tab);
   };
 
-  let currentTab: JSX.Element | null = null;
-
-  switch (current) {
-    case TabsItems.Overview:
-      currentTab = <TabOverview film={film}/>;
-      break;
-    case TabsItems.Details:
-      currentTab = <TabDetails film={film}/>;
-      break;
-    case TabsItems.Reviews:
-      currentTab = <TabReviews reviews={reviews}/>;
-      break;
-  }
-
   return (
-    <Fragment>
+    <>
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {Object.keys(TabsItems).map((tab) => (
@@ -49,8 +35,10 @@ function FilmTabs({film}: FilmTabsProps) {
         </ul>
       </nav>
 
-      {currentTab}
-    </Fragment>
+      {current === TabsItems.Overview && <OverviewTab film={film}/>}
+      {current === TabsItems.Details && <DetailsTab film={film}/>}
+      {current === TabsItems.Reviews && <ReviewsTab reviews={reviews}/>}
+    </>
   );
 }
 

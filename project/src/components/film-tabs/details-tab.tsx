@@ -1,13 +1,12 @@
-import {Fragment} from 'react';
 import {Film} from '../../types/film';
 
 const MINUTES_IN_HOUR = 60;
 
-type TabDetailsProps = {
+type DetailsTabProps = {
   film: Film,
 }
 
-const getRuntimeStr = (minutes: number): string => {
+const getFormattedDuration = (minutes: number): string => {
   if (minutes < MINUTES_IN_HOUR) {
     return `${minutes}m`;
   }
@@ -15,7 +14,7 @@ const getRuntimeStr = (minutes: number): string => {
   return `${Math.floor(minutes / MINUTES_IN_HOUR)}h ${minutes % MINUTES_IN_HOUR}m`;
 };
 
-function TabDetails({film}: TabDetailsProps): JSX.Element {
+function DetailsTab({film}: DetailsTabProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -26,16 +25,7 @@ function TabDetails({film}: TabDetailsProps): JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film.starring.map((star, index) => {
-              const newLine = index !== film.starring.length - 1;
-
-              return (
-                <Fragment key={star}>
-                  {`${star}${newLine ? ',' : ''}`}
-                  {newLine && <br/>}
-                </Fragment>
-              );
-            })}
+            {film.starring.join(',\n')}
           </span>
         </p>
       </div>
@@ -43,7 +33,7 @@ function TabDetails({film}: TabDetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{getRuntimeStr(film.runTime)}</span>
+          <span className="film-card__details-value">{getFormattedDuration(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -58,4 +48,4 @@ function TabDetails({film}: TabDetailsProps): JSX.Element {
   );
 }
 
-export default TabDetails;
+export default DetailsTab;

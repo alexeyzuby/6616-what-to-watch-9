@@ -1,4 +1,3 @@
-import React from 'react';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
@@ -14,7 +13,7 @@ type MainScreenProps = {
 
 function MainScreen({promo, films}: MainScreenProps): JSX.Element {
   return (
-    <React.Fragment>
+    <>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
@@ -149,7 +148,7 @@ function MainScreen({promo, films}: MainScreenProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

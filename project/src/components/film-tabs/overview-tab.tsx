@@ -1,15 +1,14 @@
-import {Fragment} from 'react';
 import {Film} from '../../types/film';
 
-type TabOverviewProps = {
+type OverviewTabProps = {
   film: Film,
 }
 
-function TabOverview({film}: TabOverviewProps): JSX.Element {
+function OverviewTab({film}: OverviewTabProps): JSX.Element {
   const filmStarring = film.starring.join(', ');
 
   return (
-    <Fragment>
+    <>
       <div className="film-rating">
         <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
@@ -23,8 +22,8 @@ function TabOverview({film}: TabOverviewProps): JSX.Element {
         <p className="film-card__director"><strong>Director: {film.director}</strong></p>
         <p className="film-card__starring"><strong>Starring: {filmStarring} and other</strong></p>
       </div>
-    </Fragment>
+    </>
   );
 }
 
-export default TabOverview;
+export default OverviewTab;

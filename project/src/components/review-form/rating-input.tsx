@@ -1,5 +1,3 @@
-import {Fragment} from 'react';
-
 type RatingInputProps = {
   value: number,
   checked: boolean,
@@ -8,7 +6,7 @@ type RatingInputProps = {
 
 function RatingInput({value, checked, onChange}: RatingInputProps): JSX.Element {
   return (
-    <Fragment>
+    <>
       <input
         className="rating__input"
         id={`star-${value}`}
@@ -19,7 +17,7 @@ function RatingInput({value, checked, onChange}: RatingInputProps): JSX.Element 
         onChange={({target}) => onChange(Number(target.value))}
       />
       <label className="rating__label" htmlFor={`star-${value}`}>{`Rating ${value}`}</label>
-    </Fragment>
+    </>
   );
 }
 

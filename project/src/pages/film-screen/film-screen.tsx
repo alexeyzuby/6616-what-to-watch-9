@@ -1,10 +1,12 @@
-import {Fragment, MouseEvent} from 'react';
+import {MouseEvent} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+
+const MAX_SIMILAR_COUNT = 4;
 
 type FilmScreenProps = {
   films: Film[],
@@ -24,8 +26,10 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
     navigate(`/player/${currentFilm.id}`);
   };
 
+  const similarFilms = films.filter((film) => film.genre === currentFilm.genre && film.id !== currentFilm.id).slice(0, MAX_SIMILAR_COUNT);
+
   return (
-    <Fragment>
+    <>
       <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -91,7 +95,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
-          <SimilarFilms films={films} filmGenre={currentFilm.genre} filmId={currentFilm.id}/>
+          <SimilarFilms films={similarFilms}/>
         </section>
 
         <footer className="page-footer">
@@ -102,7 +106,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </Fragment>
+    </>
   );
 }
 
