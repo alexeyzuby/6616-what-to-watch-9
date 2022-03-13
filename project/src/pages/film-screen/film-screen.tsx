@@ -1,9 +1,12 @@
-import {Fragment, MouseEvent} from 'react';
+import {MouseEvent} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
-import FilmsList from '../../components/films-list/films-list';
+import FilmTabs from '../../components/film-tabs/film-tabs';
+import SimilarFilms from '../../components/similar-films/similar-films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+
+const MAX_SIMILAR_COUNT = 4;
 
 type FilmScreenProps = {
   films: Film[],
@@ -23,10 +26,10 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
     navigate(`/player/${currentFilm.id}`);
   };
 
-  const filmStarring = currentFilm.starring.join(', ');
+  const similarFilms = films.filter((film) => film.genre === currentFilm.genre && film.id !== currentFilm.id).slice(0, MAX_SIMILAR_COUNT);
 
   return (
-    <Fragment>
+    <>
       <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -84,33 +87,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{currentFilm.scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{currentFilm.description}</p>
-                <p className="film-card__director"><strong>Director: {currentFilm.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {filmStarring} and other</strong></p>
-              </div>
+              <FilmTabs film={currentFilm}/>
             </div>
           </div>
         </div>
@@ -118,9 +95,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <FilmsList films={films}/>
+          <SimilarFilms films={similarFilms}/>
         </section>
 
         <footer className="page-footer">
@@ -131,7 +106,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </Fragment>
+    </>
   );
 }
 

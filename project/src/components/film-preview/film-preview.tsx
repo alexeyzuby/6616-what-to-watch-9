@@ -14,16 +14,17 @@ function FilmPreview({src, poster, isActive, isMuted}: FilmPreviewProps): JSX.El
   const previewRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (previewRef.current === null) {
+    const currentElement = previewRef.current;
+
+    if (currentElement === null) {
       return;
     }
 
-    const currentElement = previewRef.current;
     let timer: ReturnType<typeof setTimeout>;
 
     if (isActive) {
-      timer = setTimeout(() => {
-        currentElement.play();
+      timer = setTimeout(async () => {
+        await currentElement.play();
       }, TIMER_DURATION);
     }
 
