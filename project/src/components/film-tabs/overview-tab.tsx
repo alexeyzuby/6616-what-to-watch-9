@@ -5,8 +5,6 @@ type OverviewTabProps = {
 }
 
 function OverviewTab({film}: OverviewTabProps): JSX.Element {
-  const filmStarring = film.starring.join(', ');
-
   return (
     <>
       <div className="film-rating">
@@ -20,7 +18,7 @@ function OverviewTab({film}: OverviewTabProps): JSX.Element {
       <div className="film-card__text">
         <p>{film.description}</p>
         <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-        <p className="film-card__starring"><strong>Starring: {filmStarring} and other</strong></p>
+        <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
       </div>
     </>
   );

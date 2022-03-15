@@ -3,7 +3,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import FilmTabs from '../../components/film-tabs/film-tabs';
-import SimilarFilms from '../../components/similar-films/similar-films';
+import FilmsList from '../../components/films-list/films-list';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const MAX_SIMILAR_COUNT = 4;
@@ -95,7 +95,8 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
-          <SimilarFilms films={similarFilms}/>
+          {similarFilms.length !== 0 && <h2 className="catalog__title">More like this</h2>}
+          <FilmsList films={similarFilms}/>
         </section>
 
         <footer className="page-footer">
