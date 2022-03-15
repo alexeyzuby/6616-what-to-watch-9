@@ -1,6 +1,6 @@
+import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeGenre} from '../../store/action';
-import {MouseEvent} from 'react';
 
 type GenresListProps = {
   genres: string[],
