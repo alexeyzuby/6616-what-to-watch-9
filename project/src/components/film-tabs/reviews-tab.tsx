@@ -13,16 +13,17 @@ function ReviewsTab({reviews}: ReviewsTabProps): JSX.Element {
     return <p style={{color: NO_REVIEWS_TEXT_COLOR}}>No reviews...</p>;
   }
 
-  const leftCol = reviews.filter((review, index) => (index % REVIEWS_COLS_COUNT) === 0);
-  const rightCol = reviews.filter((review, index) => (index % REVIEWS_COLS_COUNT) === 1);
-
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {leftCol.map((review) => <FilmReview key={review.id} review={review}/>)}
+        {reviews.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 0).map((review) => (
+          <FilmReview key={review.id} review={review}/>
+        ))}
       </div>
       <div className="film-card__reviews-col">
-        {rightCol.map((review) => <FilmReview key={review.id} review={review}/>)}
+        {reviews.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 1).map((review) => (
+          <FilmReview key={review.id} review={review}/>
+        ))}
       </div>
     </div>
   );
