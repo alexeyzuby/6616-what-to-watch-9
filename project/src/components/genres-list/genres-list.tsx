@@ -1,6 +1,6 @@
 import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeGenre} from '../../store/action';
+import {changeGenre, resetShowMoreCount} from '../../store/action';
 
 type GenresListProps = {
   genres: string[],
@@ -13,6 +13,7 @@ function GenresList({genres}: GenresListProps): JSX.Element {
 
   const genreClickHandler = (evt: MouseEvent<HTMLAnchorElement>, genre: string) => {
     evt.preventDefault();
+    dispatch(resetShowMoreCount());
     dispatch(changeGenre(genre));
   };
 
