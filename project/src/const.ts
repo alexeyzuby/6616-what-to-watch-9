@@ -1,5 +1,5 @@
 export const DEFAULT_GENRE = 'All genres';
-export const DEFAULT_SHOW_COUNT = 4;
+export const DEFAULT_SHOW_COUNT = 8;
 
 export enum AppRoute {
   Main = '/',
