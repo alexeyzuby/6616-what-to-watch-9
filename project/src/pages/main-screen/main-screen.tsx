@@ -1,7 +1,10 @@
-import {useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {resetShowMoreCount} from '../../store/action';
 import Logo from '../../components/logo/logo';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
+import ShowMore from '../../components/show-more/show-more';
 
 type MainScreenProps = {
   promo: {
@@ -12,8 +15,16 @@ type MainScreenProps = {
 }
 
 function MainScreen({promo}: MainScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const genres = useAppSelector((state) => state.genres);
-  const films = useAppSelector((state) => state.films);
+  const filmsCount = useAppSelector((state) => state.films.length);
+  const showedFilmsCount = useAppSelector((state) => state.showedFilmsCount);
+  const films = useAppSelector((state) => state.films).slice(0, showedFilmsCount);
+
+  useEffect(() => {
+    dispatch(resetShowMoreCount());
+  }, []);
 
   return (
     <>
@@ -102,13 +113,9 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
           <GenresList genres={genres}/>
           <FilmsList films={films}/>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMore filmsCount={filmsCount} showedCount={showedFilmsCount}/>
         </section>
 
         <footer className="page-footer">
