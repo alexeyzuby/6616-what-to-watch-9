@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {resetShowMoreCount} from '../../store/action';
+import {resetLoadedFilmsCount} from '../../store/action';
 import Logo from '../../components/logo/logo';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
@@ -19,11 +19,11 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
 
   const genres = useAppSelector((state) => state.genres);
   const filmsCount = useAppSelector((state) => state.films.length);
-  const showedFilmsCount = useAppSelector((state) => state.showedFilmsCount);
-  const films = useAppSelector((state) => state.films).slice(0, showedFilmsCount);
+  const loadedFilmsCount = useAppSelector((state) => state.loadedFilmsCount);
+  const films = useAppSelector((state) => state.films).slice(0, loadedFilmsCount);
 
   useEffect(() => {
-    dispatch(resetShowMoreCount());
+    dispatch(resetLoadedFilmsCount());
   }, []);
 
   return (
@@ -115,7 +115,7 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genres}/>
           <FilmsList films={films}/>
-          <ShowMore filmsCount={filmsCount} showedCount={showedFilmsCount}/>
+          {filmsCount > loadedFilmsCount && <ShowMore/>}
         </section>
 
         <footer className="page-footer">

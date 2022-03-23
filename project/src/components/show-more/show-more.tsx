@@ -1,22 +1,13 @@
 import {useAppDispatch} from '../../hooks';
-import {showMore} from '../../store/action';
+import {loadMore} from '../../store/action';
 
-type ShowMoreProps = {
-  filmsCount: number,
-  showedCount: number,
-}
-
-function ShowMore({filmsCount, showedCount}: ShowMoreProps): JSX.Element | null {
+function ShowMore(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  if (showedCount >= filmsCount) {
-    return null;
-  }
 
   return (
     <div className="catalog__more">
       <button className="catalog__button" type="button" onClick={() => {
-        dispatch(showMore());
+        dispatch(loadMore());
       }}
       >Show more
       </button>

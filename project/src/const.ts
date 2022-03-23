@@ -1,5 +1,5 @@
 export const DEFAULT_GENRE = 'All genres';
-export const DEFAULT_SHOW_COUNT = 8;
+export const DEFAULT_LOADED_FILMS_COUNT = 8;
 
 export enum AppRoute {
   Main = '/',

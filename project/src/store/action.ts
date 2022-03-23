@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
 
 export const changeGenre = createAction<string>('changeGenre');
-export const showMore = createAction('showMore');
-export const resetShowMoreCount = createAction('resetShowMoreCount');
+export const loadMore = createAction('loadMore');
+export const resetLoadedFilmsCount = createAction('resetLoadedFilmsCount');
