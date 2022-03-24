@@ -18,9 +18,9 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const genres = useAppSelector((state) => state.genres);
-  const filmsCount = useAppSelector((state) => state.films.length);
+  const filmsCount = useAppSelector((state) => state.sortedFilms.length);
   const loadedFilmsCount = useAppSelector((state) => state.loadedFilmsCount);
-  const films = useAppSelector((state) => state.films).slice(0, loadedFilmsCount);
+  const films = useAppSelector((state) => state.sortedFilms).slice(0, loadedFilmsCount);
 
   useEffect(() => {
     dispatch(resetLoadedFilmsCount());
