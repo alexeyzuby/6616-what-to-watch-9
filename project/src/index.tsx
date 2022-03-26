@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {fetchFilmsAction} from './store/api-actions';
+import {checkAuthAction, fetchFilmsAction} from './store/api-actions';
 import ErrorMessage from './components/error-message/error-message';
 import App from './components/app/app';
 
@@ -13,6 +13,7 @@ const promoFilm = {
 };
 
 store.dispatch(fetchFilmsAction());
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>

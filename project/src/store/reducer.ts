@@ -1,9 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {DEFAULT_GENRE, DEFAULT_LOADED_FILMS_COUNT} from '../const';
+import {AuthorizationStatus, DEFAULT_GENRE, DEFAULT_LOADED_FILMS_COUNT} from '../const';
 import {Film} from '../types/film';
-import {changeGenre, getFilms, loadMore, resetLoadedFilmsCount, setError} from './action';
+import {changeGenre, getFilms, loadMore, requireAuthorization, resetLoadedFilmsCount, setError} from './action';
 
 type InitialState = {
+  authorizationStatus: AuthorizationStatus,
   films: Film[],
   sortedFilms: Film[],
   genres: string[],
@@ -14,6 +15,7 @@ type InitialState = {
 }
 
 const initialState : InitialState = {
+  authorizationStatus: AuthorizationStatus.Unknown,
   films: [],
   sortedFilms: [],
   genres: [],
@@ -25,6 +27,9 @@ const initialState : InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
     .addCase(getFilms, (state, action) => {
       state.films = action.payload;
       state.sortedFilms = action.payload;

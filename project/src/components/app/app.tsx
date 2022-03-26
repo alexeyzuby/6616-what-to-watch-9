@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
@@ -40,7 +40,7 @@ function App({promo}: AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute>
               <MyListScreen films={films}/>
             </PrivateRoute>
           }
@@ -51,7 +51,11 @@ function App({promo}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen films={films}/>}
+          element={
+            <PrivateRoute>
+              <AddReviewScreen films={films}/>
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Player}
