@@ -1,6 +1,6 @@
 import {MouseEvent} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import {Films} from '../../types/film';
+import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
@@ -9,7 +9,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 const MAX_SIMILAR_COUNT = 4;
 
 type FilmScreenProps = {
-  films: Films,
+  films: Film[],
 }
 
 function FilmScreen({films}: FilmScreenProps): JSX.Element {

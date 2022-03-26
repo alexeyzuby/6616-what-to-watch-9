@@ -1,11 +1,11 @@
 import {Link, useParams} from 'react-router-dom';
-import {Films} from '../../types/film';
+import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type AddReviewScreenProps = {
-  films: Films,
+  films: Film[],
 }
 
 function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {

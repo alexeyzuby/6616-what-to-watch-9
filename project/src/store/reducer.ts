@@ -1,11 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {DEFAULT_GENRE, DEFAULT_LOADED_FILMS_COUNT} from '../const';
-import {Films} from '../types/film';
+import {Film} from '../types/film';
 import {changeGenre, getFilms, loadMore, resetLoadedFilmsCount, setError} from './action';
 
 type InitialState = {
-  films: Films,
-  sortedFilms: Films,
+  films: Film[],
+  sortedFilms: Film[],
   genres: string[],
   currentGenre: string,
   loadedFilmsCount: number,

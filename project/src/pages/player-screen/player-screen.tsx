@@ -1,10 +1,10 @@
 import {MouseEvent} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {Films} from '../../types/film';
+import {Film} from '../../types/film';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type PlayerScreenProps = {
-  films: Films,
+  films: Film[],
 }
 
 function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
