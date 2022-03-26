@@ -1,7 +1,8 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {Film} from '../../types/film';
+import {useAppSelector} from '../../hooks';
 import PrivateRoute from '../private-route/private-route';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
@@ -16,10 +17,15 @@ type AppProps = {
     genre: string,
     year: string,
   },
-  films: Film[],
 }
 
-function App({promo, films}: AppProps): JSX.Element {
+function App({promo}: AppProps): JSX.Element {
+  const {isDataLoaded, films} = useAppSelector((state) => state);
+
+  if (!isDataLoaded) {
+    return <LoadingScreen/>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>

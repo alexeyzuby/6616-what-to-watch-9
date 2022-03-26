@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {films} from './mocks/films';
+import {fetchFilmsAction} from './store/api-actions';
+import ErrorMessage from './components/error-message/error-message';
 import App from './components/app/app';
 
 const promoFilm = {
@@ -11,10 +12,13 @@ const promoFilm = {
   year: '2014',
 };
 
+store.dispatch(fetchFilmsAction());
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App promo={promoFilm} films={films}/>
+      <ErrorMessage/>
+      <App promo={promoFilm}/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
