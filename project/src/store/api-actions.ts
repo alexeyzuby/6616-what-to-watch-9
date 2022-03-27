@@ -1,22 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api, store} from './index';
-import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import {APIRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
-import {getFilms, requireAuthorization, setError} from './action';
-
-export const clearErrorAction = createAsyncThunk(
-  'app/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError('')),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
+import {getFilms, requireAuthorization} from './action';
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',

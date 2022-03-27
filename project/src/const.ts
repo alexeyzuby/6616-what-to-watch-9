@@ -1,6 +1,5 @@
 export const DEFAULT_GENRE = 'All genres';
 export const DEFAULT_LOADED_FILMS_COUNT = 8;
-export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum AppRoute {
   Main = '/',
