@@ -1,5 +1,6 @@
 import {FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import {AppRoute} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
@@ -14,6 +15,12 @@ function SignInScreen(): JSX.Element {
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
+    if (email.trim() === '' || password.trim() === '') {
+      toast.error('Email and password cannot be empty');
+      return;
+    }
+
     dispatch(loginAction({email, password}));
     navigate(AppRoute.Main);
   };
