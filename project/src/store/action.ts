@@ -1,9 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
-import {Films} from '../types/film';
+import {AuthorizationStatus} from '../const';
+import {Film} from '../types/film';
 
-export const getFilms = createAction<Films>('data/getFilms');
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const getFilms = createAction<Film[]>('data/getFilms');
 
 export const changeGenre = createAction<string>('app/changeGenre');
 export const loadMore = createAction('app/loadMore');
 export const resetLoadedFilmsCount = createAction('app/resetLoadedFilmsCount');
-export const setError = createAction<string>('app/setError');

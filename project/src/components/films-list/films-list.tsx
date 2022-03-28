@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {Films} from '../../types/film';
+import {Film} from '../../types/film';
 import FilmCard from '../film-card/film-card';
 
 type FilmsListProps = {
-  films: Films,
+  films: Film[],
 };
 
 function FilmsList({films}: FilmsListProps): JSX.Element {

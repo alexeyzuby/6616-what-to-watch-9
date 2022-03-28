@@ -1,6 +1,5 @@
 export const DEFAULT_GENRE = 'All genres';
 export const DEFAULT_LOADED_FILMS_COUNT = 8;
-export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum AppRoute {
   Main = '/',
@@ -19,10 +18,12 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
 }
 
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
