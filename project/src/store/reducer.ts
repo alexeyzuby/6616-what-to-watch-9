@@ -1,22 +1,30 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {AuthorizationStatus, DEFAULT_GENRE, DEFAULT_LOADED_FILMS_COUNT} from '../const';
 import {Film} from '../types/film';
-import {changeGenre, getFilms, loadMore, requireAuthorization, resetLoadedFilmsCount} from './action';
+import {Review} from '../types/review';
+import {changeGenre, cleanCurrentFilm, getCurrentFilm, getFilms, getReviews, getSimilarFilms, loadMore, requireAuthorization, resetLoadedFilmsCount} from './action';
+
 
 type InitialState = {
   authorizationStatus: AuthorizationStatus,
   films: Film[],
   sortedFilms: Film[],
+  currentFilm: Film | null | undefined,
+  similarFilms: Film[],
+  reviews: Review[],
   genres: string[],
   currentGenre: string,
   loadedFilmsCount: number,
   isDataLoaded: boolean,
 }
 
-const initialState : InitialState = {
+const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   films: [],
   sortedFilms: [],
+  currentFilm: null,
+  similarFilms: [],
+  reviews: [],
   genres: [],
   currentGenre: DEFAULT_GENRE,
   loadedFilmsCount: DEFAULT_LOADED_FILMS_COUNT,
@@ -33,6 +41,18 @@ const reducer = createReducer(initialState, (builder) => {
       state.sortedFilms = action.payload;
       state.genres = [...new Set([DEFAULT_GENRE, ...Array.from(state.films, ({genre}) => genre)])];
       state.isDataLoaded = true;
+    })
+    .addCase(getCurrentFilm, (state, action) => {
+      state.currentFilm = action.payload;
+    })
+    .addCase(cleanCurrentFilm, (state) => {
+      state.currentFilm = null;
+    })
+    .addCase(getSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(getReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(changeGenre, (state, action) => {
       state.currentGenre = action.payload;

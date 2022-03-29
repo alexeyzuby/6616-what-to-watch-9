@@ -1,20 +1,39 @@
+import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import {Film} from '../../types/film';
+import {useAppSelector} from '../../hooks';
+import {fetchCurrentFilmAction} from '../../store/api-actions';
+import {cleanCurrentFilm} from '../../store/action';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type AddReviewScreenProps = {
-  films: Film[],
-}
+function AddReviewScreen(): JSX.Element {
+  const {currentFilm} = useAppSelector((state) => state);
 
-function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
   const params = useParams();
-  const currentFilm = films.find((film) => film.id === Number(params.id));
+  const dispatch = useDispatch();
 
-  if (!currentFilm) {
+  const currentFilmId = Number(params.id);
+
+  useEffect(() => {
+    if (currentFilm === null || currentFilm?.id !== currentFilmId) {
+      dispatch(fetchCurrentFilmAction(currentFilmId));
+    }
+  }, [currentFilm, currentFilmId, dispatch]);
+
+  useEffect(() => () => {
+    dispatch(cleanCurrentFilm());
+  }, [dispatch]);
+
+  if (currentFilm === undefined) {
     return <NotFoundScreen/>;
+  }
+
+  if (currentFilm === null || currentFilm.id !== currentFilmId) {
+    return <LoadingScreen/>;
   }
 
   return (
