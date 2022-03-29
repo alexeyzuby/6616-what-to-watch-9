@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {AuthorizationStatus, DEFAULT_GENRE, DEFAULT_LOADED_FILMS_COUNT} from '../const';
 import {Film} from '../types/film';
 import {Review} from '../types/review';
-import {changeGenre, getCurrentFilm, getFilms, getReviews, getSimilarFilms, loadMore, requireAuthorization, resetLoadedFilmsCount} from './action';
+import {changeGenre, cleanCurrentFilm, getCurrentFilm, getFilms, getReviews, getSimilarFilms, loadMore, requireAuthorization, resetLoadedFilmsCount} from './action';
 
 
 type InitialState = {
@@ -44,6 +44,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getCurrentFilm, (state, action) => {
       state.currentFilm = action.payload;
+    })
+    .addCase(cleanCurrentFilm, (state) => {
+      state.currentFilm = null;
     })
     .addCase(getSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;

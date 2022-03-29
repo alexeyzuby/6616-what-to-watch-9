@@ -2,12 +2,12 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api, store} from './index';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
-import {Review} from '../types/review';
+import {Comment, Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
-import {getCurrentFilm, getFilms, getReviews, getSimilarFilms, requireAuthorization} from './action';
+import {getCurrentFilm, getFilms, getReviews, getSimilarFilms, redirectToRoute, requireAuthorization} from './action';
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',
@@ -52,6 +52,18 @@ export const fetchReviewsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
       store.dispatch(getReviews(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const addCommentAction = createAsyncThunk(
+  'film/addComment',
+  async ({filmId, comment, rating}: Comment) => {
+    try {
+      await api.post<Comment>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
+      store.dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}`));
     } catch (error) {
       errorHandle(error);
     }

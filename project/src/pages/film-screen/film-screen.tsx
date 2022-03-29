@@ -9,11 +9,13 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import {cleanCurrentFilm} from '../../store/action';
+import {AuthorizationStatus} from '../../const';
 
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
-  const {currentFilm, similarFilms, reviews} = useAppSelector((state) => state);
+  const {currentFilm, similarFilms, reviews, authorizationStatus} = useAppSelector((state) => state);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ function FilmScreen(): JSX.Element {
       dispatch(fetchReviewsAction(currentFilmId));
     }
   }, [currentFilm, currentFilmId, dispatch]);
+
+  useEffect(() => () => {
+    dispatch(cleanCurrentFilm());
+  }, [dispatch]);
 
   if (currentFilm === undefined) {
     return <NotFoundScreen/>;
@@ -79,7 +85,7 @@ function FilmScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
