@@ -1,12 +1,13 @@
 import {MouseEvent, useState} from 'react';
-import {reviews} from '../../mocks/reviews';
 import {Film} from '../../types/film';
+import {Review} from '../../types/review';
 import OverviewTab from './overview-tab';
 import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
 
 type FilmTabsProps = {
-  film: Film;
+  film: Film,
+  reviews: Review[],
 };
 
 const TabsItems = {
@@ -15,7 +16,7 @@ const TabsItems = {
   Reviews: 'Reviews',
 };
 
-function FilmTabs({film}: FilmTabsProps) {
+function FilmTabs({film, reviews}: FilmTabsProps) {
   const [current, setCurrent] = useState(TabsItems.Overview);
 
   const tabClickHandler = (evt: MouseEvent<HTMLAnchorElement>, tab: string) => {
