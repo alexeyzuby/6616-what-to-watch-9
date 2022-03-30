@@ -1,11 +1,6 @@
-import {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {resetLoadedFilmsCount} from '../../store/action';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import GenresList from '../../components/genres-list/genres-list';
-import FilmsList from '../../components/films-list/films-list';
-import ShowMore from '../../components/show-more/show-more';
+import FilmsCatalog from '../../components/films-catalog/films-catalog';
 
 type MainScreenProps = {
   promo: {
@@ -16,17 +11,6 @@ type MainScreenProps = {
 }
 
 function MainScreen({promo}: MainScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const genres = useAppSelector((state) => state.genres);
-  const filmsCount = useAppSelector((state) => state.sortedFilms.length);
-  const loadedFilmsCount = useAppSelector((state) => state.loadedFilmsCount);
-  const films = useAppSelector((state) => state.sortedFilms).slice(0, loadedFilmsCount);
-
-  useEffect(() => () => {
-    dispatch(resetLoadedFilmsCount());
-  }, [dispatch]);
-
   return (
     <>
       <div className="visually-hidden">
@@ -102,12 +86,7 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList genres={genres}/>
-          <FilmsList films={films}/>
-          {filmsCount > loadedFilmsCount && <ShowMore/>}
-        </section>
+        <FilmsCatalog/>
 
         <footer className="page-footer">
           <Logo className="logo__link--light"/>

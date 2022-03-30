@@ -11,7 +11,4 @@ export const cleanCurrentFilm = createAction('data/cleanCurrentFilm');
 export const getSimilarFilms = createAction<Film[]>('data/getSimilarFilms');
 export const getReviews = createAction<Review[]>('data/getReviews');
 
-export const changeGenre = createAction<string>('app/changeGenre');
-export const loadMore = createAction('app/loadMore');
-export const resetLoadedFilmsCount = createAction('app/resetLoadedFilmsCount');
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
