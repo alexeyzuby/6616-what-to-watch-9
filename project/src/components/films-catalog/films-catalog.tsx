@@ -9,7 +9,8 @@ function FilmsCatalog(): JSX.Element {
   const [currentGenre, setCurrentGenre] = useState(DEFAULT_GENRE);
   const [maxFilmsCount, setMaxFilmsCount] = useState(DEFAULT_LOADED_FILMS_COUNT);
 
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({FILMS}) => FILMS);
+
   const sortedFilms = currentGenre === DEFAULT_GENRE ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set([DEFAULT_GENRE, ...Array.from(films, ({genre}) => genre)])];
 

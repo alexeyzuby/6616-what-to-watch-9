@@ -14,7 +14,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 function App(): JSX.Element {
-  const {isDataLoaded, films} = useAppSelector((state) => state);
+  const {isDataLoaded, films} = useAppSelector(({FILMS}) => FILMS);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;

@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
-import {cleanCurrentFilm} from '../../store/action';
+import {cleanCurrentFilm} from '../../store/films-data/films-data';
 import {fetchCurrentFilmAction, fetchReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import Logo from '../../components/logo/logo';
@@ -16,7 +16,8 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
-  const {currentFilm, similarFilms, reviews, authorizationStatus} = useAppSelector((state) => state);
+  const {currentFilm, similarFilms, reviews} = useAppSelector(({FILMS}) => FILMS);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   const params = useParams();
   const dispatch = useDispatch();

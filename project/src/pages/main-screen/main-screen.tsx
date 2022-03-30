@@ -6,7 +6,7 @@ import Logo from '../../components/logo/logo';
 import FilmsCatalog from '../../components/films-catalog/films-catalog';
 
 function MainScreen(): JSX.Element {
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const {promoFilm} = useAppSelector(({FILMS}) => FILMS);
 
   if (promoFilm === null) {
     return <LoadingScreen/>;

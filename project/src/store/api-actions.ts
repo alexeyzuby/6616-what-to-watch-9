@@ -5,9 +5,11 @@ import {Film} from '../types/film';
 import {Comment, Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
+import {getCurrentFilm, getFilms, getPromoFilm, getReviews, getSimilarFilms} from './films-data/films-data';
+import {requireAuthorization} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
-import {getCurrentFilm, getFilms, getPromoFilm, getReviews, getSimilarFilms, redirectToRoute, requireAuthorization} from './action';
+import {redirectToRoute} from './action';
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',

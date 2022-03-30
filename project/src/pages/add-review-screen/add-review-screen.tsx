@@ -2,8 +2,8 @@ import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
+import {cleanCurrentFilm} from '../../store/films-data/films-data';
 import {fetchCurrentFilmAction} from '../../store/api-actions';
-import {cleanCurrentFilm} from '../../store/action';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
@@ -11,7 +11,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function AddReviewScreen(): JSX.Element {
-  const {currentFilm} = useAppSelector((state) => state);
+  const {currentFilm} = useAppSelector(({FILMS}) => FILMS);
 
   const params = useParams();
   const dispatch = useDispatch();
