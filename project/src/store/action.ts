@@ -6,6 +6,7 @@ import {Review} from '../types/review';
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const getFilms = createAction<Film[]>('data/getFilms');
+export const getPromoFilm = createAction<Film>('data/getPromoFilm');
 export const getCurrentFilm = createAction<Film | undefined>('data/getCurrentFilm');
 export const cleanCurrentFilm = createAction('data/cleanCurrentFilm');
 export const getSimilarFilms = createAction<Film[]>('data/getSimilarFilms');
