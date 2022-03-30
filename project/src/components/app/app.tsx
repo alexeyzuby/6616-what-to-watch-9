@@ -14,9 +14,9 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 function App(): JSX.Element {
-  const {isDataLoaded, films, promoFilm} = useAppSelector((state) => state);
+  const {isDataLoaded, films} = useAppSelector((state) => state);
 
-  if (!isDataLoaded || promoFilm === null) {
+  if (!isDataLoaded) {
     return <LoadingScreen/>;
   }
 
@@ -25,7 +25,7 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen promoFilm={promoFilm}/>}
+          element={<MainScreen/>}
         />
         <Route
           path={AppRoute.SignIn}

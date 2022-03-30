@@ -1,13 +1,16 @@
-import {Film} from '../../types/film';
+import {useAppSelector} from '../../hooks';
 import Logo from '../../components/logo/logo';
 import FilmsCatalog from '../../components/films-catalog/films-catalog';
 import PromoCard from '../../components/promo-card/promo-card';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type MainScreenProps = {
-  promoFilm: Film,
-}
+function MainScreen(): JSX.Element {
+  const promoFilm = useAppSelector((state) => state.promoFilm);
 
-function MainScreen({promoFilm}: MainScreenProps): JSX.Element {
+  if (promoFilm === null) {
+    return <LoadingScreen/>;
+  }
+
   return (
     <>
       <div className="visually-hidden">
