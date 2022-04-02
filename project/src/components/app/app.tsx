@@ -13,16 +13,8 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
-type AppProps = {
-  promo: {
-    title: string,
-    genre: string,
-    year: string,
-  },
-}
-
-function App({promo}: AppProps): JSX.Element {
-  const {isDataLoaded, films} = useAppSelector((state) => state);
+function App(): JSX.Element {
+  const {isDataLoaded, films} = useAppSelector(({FILMS}) => FILMS);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;
@@ -33,7 +25,7 @@ function App({promo}: AppProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen promo={promo}/>}
+          element={<MainScreen/>}
         />
         <Route
           path={AppRoute.SignIn}

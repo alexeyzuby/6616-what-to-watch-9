@@ -1,16 +1,11 @@
-import {useAppDispatch} from '../../hooks';
-import {loadMore} from '../../store/action';
+type ShowMoreProps = {
+  setMaxFilmCount: () => void,
+};
 
-function ShowMore(): JSX.Element {
-  const dispatch = useAppDispatch();
-
+function ShowMore({setMaxFilmCount}: ShowMoreProps): JSX.Element {
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={() => {
-        dispatch(loadMore());
-      }}
-      >Show more
-      </button>
+      <button className="catalog__button" type="button" onClick={setMaxFilmCount}>Show more</button>
     </div>
   );
 }

@@ -1,20 +1,17 @@
 import {MouseEvent} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeGenre, resetLoadedFilmsCount} from '../../store/action';
 
 type GenresListProps = {
   genres: string[],
+  currentGenre: string,
+  setCurrentGenre: (genre: string) => void;
+  setMaxFilmCount: () => void;
 }
 
-function GenresList({genres}: GenresListProps): JSX.Element {
-  const currentGenre = useAppSelector((state) => state.currentGenre);
-
-  const dispatch = useAppDispatch();
-
+function GenresList({genres, currentGenre, setCurrentGenre, setMaxFilmCount}: GenresListProps): JSX.Element {
   const genreClickHandler = (evt: MouseEvent<HTMLAnchorElement>, genre: string) => {
     evt.preventDefault();
-    dispatch(resetLoadedFilmsCount());
-    dispatch(changeGenre(genre));
+    setCurrentGenre(genre);
+    setMaxFilmCount();
   };
 
   return (

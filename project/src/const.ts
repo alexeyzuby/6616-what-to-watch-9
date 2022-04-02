@@ -18,13 +18,19 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Films = '/films',
+  Promo = '/promo',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
 }
 
 export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
   NotFound = 404,
+}
+
+export enum NameSpace {
+  User = 'USER',
+  Films = 'FILMS',
 }
