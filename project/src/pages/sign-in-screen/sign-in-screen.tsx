@@ -5,6 +5,7 @@ import {AppRoute} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
 
 function SignInScreen(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -67,13 +68,7 @@ function SignInScreen(): JSX.Element {
         </form>
       </div>
 
-      <footer className="page-footer">
-        <Logo className="logo__link--light"/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }
