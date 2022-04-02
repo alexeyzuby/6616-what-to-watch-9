@@ -17,7 +17,7 @@ function ReviewForm(): JSX.Element {
   const params = useParams();
   const dispatch = useDispatch();
 
-  const filmId = Number(params.id);
+  const id = Number(params.id);
 
   const commentChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const reviewTextValue = evt.target.value;
@@ -34,7 +34,7 @@ function ReviewForm(): JSX.Element {
       return;
     }
 
-    dispatch(addCommentAction({filmId, comment, rating}));
+    dispatch(addCommentAction({id, comment, rating}));
   };
 
   return (

@@ -5,7 +5,7 @@ import {Film} from '../types/film';
 import {Comment, Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {getCurrentFilm, getFilms, getPromoFilm, getReviews, getSimilarFilms} from './films-data/films-data';
+import {setCurrentFilm, setFilms, setPromoFilm, setReviews, setSimilarFilms} from './films-data/films-data';
 import {requireAuthorization} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
@@ -16,7 +16,7 @@ export const fetchFilmsAction = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
-      store.dispatch(getFilms(data));
+      store.dispatch(setFilms(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -28,7 +28,7 @@ export const fetchPromoFilmAction = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Film>(APIRoute.Promo);
-      store.dispatch(getPromoFilm(data));
+      store.dispatch(setPromoFilm(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -39,11 +39,11 @@ export const fetchCurrentFilmAction = createAsyncThunk(
   'data/fetchCurrentFilm',
   async (id: number) => {
     try {
-      const {data} = await api.get<Film>(`${APIRoute.Films}/${id}`);
-      store.dispatch(getCurrentFilm(data));
+      const {data} = await api.get<Film>(APIRoute.Film(id));
+      store.dispatch(setCurrentFilm(data));
     } catch (error) {
       errorHandle(error);
-      store.dispatch(getCurrentFilm(undefined));
+      store.dispatch(setCurrentFilm(undefined));
     }
   },
 );
@@ -52,8 +52,8 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
   'data/fetchSimilarFilms',
   async (id: number) => {
     try {
-      const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
-      store.dispatch(getSimilarFilms(data));
+      const {data} = await api.get<Film[]>(APIRoute.Similar(id));
+      store.dispatch(setSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -64,8 +64,8 @@ export const fetchReviewsAction = createAsyncThunk(
   'data/fetchReviews',
   async (id: number) => {
     try {
-      const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
-      store.dispatch(getReviews(data));
+      const {data} = await api.get<Review[]>(APIRoute.Comments(id));
+      store.dispatch(setReviews(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -74,10 +74,10 @@ export const fetchReviewsAction = createAsyncThunk(
 
 export const addCommentAction = createAsyncThunk(
   'film/addComment',
-  async ({filmId, comment, rating}: Comment) => {
+  async ({id, comment, rating}: Comment) => {
     try {
-      await api.post<Comment>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
-      store.dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}`));
+      await api.post<Comment>(APIRoute.Comments(id), {comment, rating});
+      store.dispatch(redirectToRoute(APIRoute.Film(id)));
     } catch (error) {
       errorHandle(error);
     }

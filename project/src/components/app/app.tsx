@@ -1,8 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
-import browserHistory from '../../browser-history';
-import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -21,46 +19,44 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainScreen/>}
-        />
-        <Route
-          path={AppRoute.SignIn}
-          element={<SignInScreen/>}
-        />
-        <Route
-          path={AppRoute.MyList}
-          element={
-            <PrivateRoute>
-              <MyListScreen films={films}/>
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Film}
-          element={<FilmScreen/>}
-        />
-        <Route
-          path={AppRoute.AddReview}
-          element={
-            <PrivateRoute>
-              <AddReviewScreen/>
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Player}
-          element={<PlayerScreen films={films}/>}
-        />
-        <Route
-          path="*"
-          element={<NotFoundScreen/>}
-        />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<MainScreen/>}
+      />
+      <Route
+        path={AppRoute.SignIn}
+        element={<SignInScreen/>}
+      />
+      <Route
+        path={AppRoute.MyList}
+        element={
+          <PrivateRoute>
+            <MyListScreen films={films}/>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={AppRoute.Film}
+        element={<FilmScreen/>}
+      />
+      <Route
+        path={AppRoute.AddReview}
+        element={
+          <PrivateRoute>
+            <AddReviewScreen/>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={AppRoute.Player}
+        element={<PlayerScreen films={films}/>}
+      />
+      <Route
+        path="*"
+        element={<NotFoundScreen/>}
+      />
+    </Routes>
   );
 }
 

@@ -1,6 +1,3 @@
-export const DEFAULT_GENRE = 'All genres';
-export const DEFAULT_LOADED_FILMS_COUNT = 8;
-
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -16,14 +13,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum APIRoute {
-  Films = '/films',
-  Promo = '/promo',
-  Login = '/login',
-  Logout = '/logout',
-  Comments = '/comments',
-}
-
 export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
@@ -34,3 +23,13 @@ export enum NameSpace {
   User = 'USER',
   Films = 'FILMS',
 }
+
+export const APIRoute = {
+  Films: '/films',
+  Promo: '/promo',
+  Login: '/login',
+  Logout: '/logout',
+  Film: (id: number) => `/films/${id}`,
+  Similar: (id: number) => `/films/${id}/similar`,
+  Comments: (id: number) => `/comments/${id}`,
+};

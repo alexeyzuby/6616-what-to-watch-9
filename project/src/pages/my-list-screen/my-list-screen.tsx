@@ -2,6 +2,7 @@ import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
+import Footer from '../../components/footer/footer';
 
 type MyListScreenProps = {
   films: Film[],
@@ -22,13 +23,7 @@ function MyListScreen({films}: MyListScreenProps): JSX.Element {
         <FilmsList films={films}/>
       </section>
 
-      <footer className="page-footer">
-        <Logo className="logo__link--light"/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }

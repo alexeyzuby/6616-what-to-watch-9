@@ -15,20 +15,20 @@ export const filmsData = createSlice({
   name: NameSpace.Films,
   initialState,
   reducers: {
-    getFilms: (state, action) => {
+    setFilms: (state, action) => {
       state.films = action.payload;
       state.isDataLoaded = true;
     },
-    getPromoFilm: (state, action) => {
+    setPromoFilm: (state, action) => {
       state.promoFilm = action.payload;
     },
-    getCurrentFilm: (state, action) => {
+    setCurrentFilm: (state, action) => {
       state.currentFilm = action.payload;
     },
-    getSimilarFilms: (state, action) => {
+    setSimilarFilms: (state, action) => {
       state.similarFilms = action.payload;
     },
-    getReviews: (state, action) => {
+    setReviews: (state, action) => {
       state.reviews = action.payload;
     },
     cleanCurrentFilm: (state) => {
@@ -37,4 +37,4 @@ export const filmsData = createSlice({
   },
 });
 
-export const {getFilms, getPromoFilm, getCurrentFilm, getSimilarFilms, getReviews, cleanCurrentFilm} = filmsData.actions;
+export const {setFilms, setPromoFilm, setCurrentFilm, setSimilarFilms, setReviews, cleanCurrentFilm} = filmsData.actions;

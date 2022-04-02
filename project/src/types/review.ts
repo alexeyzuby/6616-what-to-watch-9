@@ -12,7 +12,7 @@ export type Review = {
 };
 
 export type Comment = {
-  filmId: number,
+  id: number,
   comment: string,
   rating: number,
 }

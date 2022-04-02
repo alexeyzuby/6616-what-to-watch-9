@@ -5,13 +5,14 @@ import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {cleanCurrentFilm} from '../../store/films-data/films-data';
 import {fetchCurrentFilmAction, fetchReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions';
-import FilmTabs from '../../components/film-tabs/film-tabs';
-import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
-import FilmsList from '../../components/films-list/films-list';
-import FilmButtons from '../../components/film-buttons/film-buttons';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import FilmButtons from '../../components/film-buttons/film-buttons';
+import FilmTabs from '../../components/film-tabs/film-tabs';
+import FilmsList from '../../components/films-list/films-list';
+import Footer from '../../components/footer/footer';
 
 const MAX_SIMILAR_COUNT = 4;
 
@@ -94,13 +95,7 @@ function FilmScreen(): JSX.Element {
           <FilmsList films={similarFilmsList}/>
         </section>
 
-        <footer className="page-footer">
-          <Logo className="logo__link--light"/>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );

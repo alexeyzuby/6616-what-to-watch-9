@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
 
 function NotFoundScreen(): JSX.Element {
   return (
@@ -15,13 +16,7 @@ function NotFoundScreen(): JSX.Element {
         <Link to="/" style={{color: 'inherit'}}>Back to main page</Link>
       </div>
 
-      <footer className="page-footer">
-        <Logo className="logo__link--light"/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }
