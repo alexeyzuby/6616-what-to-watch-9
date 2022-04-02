@@ -1,3 +1,5 @@
+import {FilmComment} from './comment';
+
 export type Film = {
   id: number,
   name: string,
@@ -18,3 +20,8 @@ export type Film = {
   isFavorite: boolean,
 };
 
+export type SelectedFilm = {
+  data: Film,
+  similar: Film[],
+  comments: FilmComment[],
+};

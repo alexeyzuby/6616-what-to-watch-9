@@ -1,10 +1,7 @@
-import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {Link, useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks';
-import {cleanCurrentFilm} from '../../store/films-data/films-data';
-import {fetchCurrentFilmAction, fetchReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions';
+import {Link} from 'react-router-dom';
+import {useFilmId} from '../../hooks/use-film-id';
+import {useFilm} from '../../hooks/use-film';
+import {useAuth} from '../../hooks/use-auth';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Logo from '../../components/logo/logo';
@@ -17,61 +14,44 @@ import Footer from '../../components/footer/footer';
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
-  const {currentFilm, similarFilms, reviews} = useAppSelector(({FILMS}) => FILMS);
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const selectedFilm = useFilm();
+  const selectedFilmId = useFilmId();
+  const isAuth = useAuth();
 
-  const params = useParams();
-  const dispatch = useDispatch();
-
-  const currentFilmId = Number(params.id);
-
-  useEffect(() => {
-    if (currentFilm === null || currentFilm?.id !== currentFilmId) {
-      dispatch(fetchCurrentFilmAction(currentFilmId));
-      dispatch(fetchSimilarFilmsAction(currentFilmId));
-      dispatch(fetchReviewsAction(currentFilmId));
-    }
-  }, [currentFilm, currentFilmId, dispatch]);
-
-  useEffect(() => () => {
-    dispatch(cleanCurrentFilm());
-  }, [dispatch]);
-
-  if (currentFilm === undefined) {
+  if (selectedFilm === undefined) {
     return <NotFoundScreen/>;
   }
 
-  if (currentFilm === null || currentFilm.id !== currentFilmId) {
+  if (selectedFilm === null || selectedFilm.data.id !== selectedFilmId) {
     return <LoadingScreen/>;
   }
 
-  const similarFilmsList = similarFilms.filter((film) => film.id !== currentFilm.id).slice(0, MAX_SIMILAR_COUNT);
+  const similarFilmsList = selectedFilm.similar.filter((film) => film.id !== selectedFilm.data.id).slice(0, MAX_SIMILAR_COUNT);
+
+  const {backgroundColor, backgroundImage, name, genre, released, id, posterImage} = selectedFilm.data;
 
   return (
     <>
-      <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
+      <section className="film-card film-card--full" style={{backgroundColor: backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilm.backgroundImage} alt={currentFilm.name}/>
+            <img src={backgroundImage} alt={name}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
-
           <header className="page-header film-card__head">
             <Logo/>
             <UserBlock/>
           </header>
-
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilm.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentFilm.genre}</span>
-                <span className="film-card__year">{currentFilm.released}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
-
               <div className="film-card__buttons">
-                <FilmButtons id={currentFilm.id}/>
-                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
+                <FilmButtons id={id}/>
+                {isAuth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -79,22 +59,19 @@ function FilmScreen(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
-
             <div className="film-card__desc">
-              <FilmTabs film={currentFilm} reviews={reviews}/>
+              <FilmTabs film={selectedFilm.data} comments={selectedFilm.comments}/>
             </div>
           </div>
         </div>
       </section>
-
       <div className="page-content">
         <section className="catalog catalog--like-this">
           {similarFilmsList.length !== 0 && <h2 className="catalog__title">More like this</h2>}
           <FilmsList films={similarFilmsList}/>
         </section>
-
         <Footer/>
       </div>
     </>

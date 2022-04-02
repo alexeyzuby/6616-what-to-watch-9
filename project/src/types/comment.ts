@@ -3,7 +3,7 @@ export type User = {
   name: string;
 };
 
-export type Review = {
+export type FilmComment = {
   comment: string,
   date: string,
   id: number,
@@ -11,7 +11,7 @@ export type Review = {
   user: User,
 };
 
-export type Comment = {
+export type UserComment = {
   id: number,
   comment: string,
   rating: number,

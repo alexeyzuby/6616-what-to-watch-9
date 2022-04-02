@@ -2,10 +2,9 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api, store} from './index';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
-import {Comment, Review} from '../types/review';
-import {AuthData} from '../types/auth-data';
-import {UserData} from '../types/user-data';
-import {setCurrentFilm, setFilms, setPromoFilm, setReviews, setSimilarFilms} from './films-data/films-data';
+import {FilmComment, UserComment} from '../types/comment';
+import {AuthData, UserData} from '../types/user';
+import {setFilms, setPromoFilm, setSelectedFilm} from './films-data/films-data';
 import {requireAuthorization} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
@@ -35,48 +34,30 @@ export const fetchPromoFilmAction = createAsyncThunk(
   },
 );
 
-export const fetchCurrentFilmAction = createAsyncThunk(
-  'data/fetchCurrentFilm',
+export const fetchSelectedFilmAction = createAsyncThunk(
+  'data/fetchSelectedFilm',
   async (id: number) => {
     try {
-      const {data} = await api.get<Film>(APIRoute.Film(id));
-      store.dispatch(setCurrentFilm(data));
+      const {data: film} = await api.get<Film>(APIRoute.Film(id));
+      const {data: similar} = await api.get<Film[]>(APIRoute.Similar(id));
+      const {data: comments} = await api.get<FilmComment[]>(APIRoute.Comments(id));
+      store.dispatch(setSelectedFilm({
+        data: film,
+        similar,
+        comments,
+      }));
     } catch (error) {
       errorHandle(error);
-      store.dispatch(setCurrentFilm(undefined));
-    }
-  },
-);
-
-export const fetchSimilarFilmsAction = createAsyncThunk(
-  'data/fetchSimilarFilms',
-  async (id: number) => {
-    try {
-      const {data} = await api.get<Film[]>(APIRoute.Similar(id));
-      store.dispatch(setSimilarFilms(data));
-    } catch (error) {
-      errorHandle(error);
-    }
-  },
-);
-
-export const fetchReviewsAction = createAsyncThunk(
-  'data/fetchReviews',
-  async (id: number) => {
-    try {
-      const {data} = await api.get<Review[]>(APIRoute.Comments(id));
-      store.dispatch(setReviews(data));
-    } catch (error) {
-      errorHandle(error);
+      store.dispatch(setSelectedFilm(undefined));
     }
   },
 );
 
 export const addCommentAction = createAsyncThunk(
   'film/addComment',
-  async ({id, comment, rating}: Comment) => {
+  async ({id, comment, rating}: UserComment) => {
     try {
-      await api.post<Comment>(APIRoute.Comments(id), {comment, rating});
+      await api.post<UserComment>(APIRoute.Comments(id), {comment, rating});
       store.dispatch(redirectToRoute(APIRoute.Film(id)));
     } catch (error) {
       errorHandle(error);

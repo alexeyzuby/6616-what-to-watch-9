@@ -1,13 +1,13 @@
 import {MouseEvent, useState} from 'react';
 import {Film} from '../../types/film';
-import {Review} from '../../types/review';
+import {FilmComment} from '../../types/comment';
 import OverviewTab from './overview-tab';
 import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
 
 type FilmTabsProps = {
   film: Film,
-  reviews: Review[],
+  comments: FilmComment[],
 };
 
 const TabsItems = {
@@ -16,7 +16,7 @@ const TabsItems = {
   Reviews: 'Reviews',
 };
 
-function FilmTabs({film, reviews}: FilmTabsProps) {
+function FilmTabs({film, comments}: FilmTabsProps) {
   const [current, setCurrent] = useState(TabsItems.Overview);
 
   const tabClickHandler = (evt: MouseEvent<HTMLAnchorElement>, tab: string) => {
@@ -38,7 +38,7 @@ function FilmTabs({film, reviews}: FilmTabsProps) {
 
       {current === TabsItems.Overview && <OverviewTab film={film}/>}
       {current === TabsItems.Details && <DetailsTab film={film}/>}
-      {current === TabsItems.Reviews && <ReviewsTab reviews={reviews}/>}
+      {current === TabsItems.Reviews && <ReviewsTab comments={comments}/>}
     </>
   );
 }
