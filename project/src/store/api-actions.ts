@@ -58,12 +58,24 @@ export const fetchCommentsAction = createAsyncThunk(
   },
 );
 
-export const setFavoriteStateAction = createAsyncThunk(
-  'data/setFavoriteState',
-  async ({id, isFavorite}: { id: number, isFavorite: boolean }) => {
+export const setFavouritePromoAction = createAsyncThunk(
+  'data/setFavouritePromo',
+  async ({promoId, isFavorite}: { promoId: number, isFavorite: boolean }) => {
     try {
-      await api.post<Film>(APIRoute.setFavorite(id, isFavorite));
-      store.dispatch(fetchFavoriteFilmsAction());
+      const {data} = await api.post<Film>(APIRoute.setFavorite(promoId, isFavorite));
+      store.dispatch(setPromoFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const setFavouriteCurrentAction = createAsyncThunk(
+  'data/setFavouriteCurrent',
+  async ({currentFilmId, isFavorite}: { currentFilmId: number, isFavorite: boolean }) => {
+    try {
+      const {data} = await api.post<Film>(APIRoute.setFavorite(currentFilmId, isFavorite));
+      store.dispatch(setCurrentFilm(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -99,9 +111,8 @@ export const addCommentAction = createAsyncThunk(
   'film/addComment',
   async ({id, comment, rating}: UserComment) => {
     try {
-      const {data} = await api.post<UserComment>(APIRoute.Comments(id), {comment, rating});
+      await api.post<UserComment>(APIRoute.Comments(id), {comment, rating});
       store.dispatch(redirectToRoute(APIRoute.Film(id)));
-      store.dispatch(setComments(data));
     } catch (error) {
       errorHandle(error);
     }

@@ -1,9 +1,8 @@
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import FilmButtons from '../../components/film-buttons/film-buttons';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
@@ -11,15 +10,16 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
 import {selectAuthorizationStatus} from '../../store/user-process/selector';
 import {selectComments, selectCurrentFilms, selectSimilarFilms} from '../../store/films-data/selector';
-import {useEffect} from 'react';
-import {fetchCommentsAction, fetchCurrentFilmAction, fetchSimilarFilmsAction} from '../../store/api-actions';
+import {MouseEvent, useEffect} from 'react';
+import {fetchCommentsAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, setFavouriteCurrentAction} from '../../store/api-actions';
 
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const dispatch = useAppDispatch();
   const params = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const currentFilm = useAppSelector(selectCurrentFilms);
   const similarFilms = useAppSelector(selectSimilarFilms);
@@ -27,7 +27,7 @@ function FilmScreen(): JSX.Element {
   const currentFilmId = Number(params.id);
 
   useEffect(() => {
-    if (currentFilm === null || currentFilm?.id !== currentFilmId) {
+    if (currentFilmId) {
       dispatch(fetchCurrentFilmAction(currentFilmId));
       dispatch(fetchSimilarFilmsAction(currentFilmId));
       dispatch(fetchCommentsAction(currentFilmId));
@@ -41,6 +41,18 @@ function FilmScreen(): JSX.Element {
   if (currentFilm === null || currentFilm.id !== currentFilmId) {
     return <LoadingScreen/>;
   }
+
+  const isFavorite = currentFilm.isFavorite;
+
+  const clickPlayHandler = (evt: MouseEvent<HTMLElement>) => {
+    evt.preventDefault();
+    navigate(`/player/${currentFilm.id}`);
+  };
+
+  const clickFavoriteHandler = (evt: MouseEvent<HTMLElement>) => {
+    evt.preventDefault();
+    dispatch(setFavouriteCurrentAction({currentFilmId, isFavorite}));
+  };
 
   const filteredSimilarFilms = similarFilms.filter((film) => film.id !== currentFilm.id).slice(0, MAX_SIMILAR_COUNT);
 
@@ -64,7 +76,18 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{currentFilm.released}</span>
               </p>
               <div className="film-card__buttons">
-                <FilmButtons id={currentFilm.id}/>
+                <button className="btn btn--play film-card__button" type="button" onClick={clickPlayHandler}>
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"/>
+                  </svg>
+                  <span>Play</span>
+                </button>
+                <button className="btn btn--list film-card__button" type="button" onClick={clickFavoriteHandler}>
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                  </svg>
+                  <span>My list</span>
+                </button>
                 {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

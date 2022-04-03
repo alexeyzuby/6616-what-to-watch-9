@@ -1,20 +1,11 @@
-import {useAppSelector} from '../../hooks';
-import LoadingScreen from '../loading-screen/loading-screen';
-import PromoCard from '../../components/promo-card/promo-card';
+import PromoFilm from '../../components/promo-film/promo-film';
 import FilmsCatalog from '../../components/films-catalog/films-catalog';
 import Footer from '../../components/footer/footer';
-import {selectPromoFilms} from '../../store/films-data/selector';
 
 function MainScreen(): JSX.Element {
-  const promoFilm = useAppSelector(selectPromoFilms);
-
-  if (promoFilm === null) {
-    return <LoadingScreen/>;
-  }
-
   return (
     <>
-      <PromoCard promoFilm={promoFilm}/>
+      <PromoFilm/>
       <div className="page-content">
         <FilmsCatalog/>
         <Footer/>

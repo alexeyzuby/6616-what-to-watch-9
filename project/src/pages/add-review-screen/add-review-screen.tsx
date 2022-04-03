@@ -17,7 +17,7 @@ function AddReviewScreen(): JSX.Element {
   const currentFilmId = Number(params.id);
 
   useEffect(() => {
-    if(currentFilm === null || currentFilm?.id !== currentFilmId) {
+    if(currentFilmId) {
       dispatch(fetchCurrentFilmAction(currentFilmId));
     }
   }, [currentFilmId]);
