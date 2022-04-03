@@ -1,11 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api, store} from './index';
-import {APIRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {UserComment} from '../types/comment';
 import {AuthData, UserData} from '../types/user';
 import {setFavoriteFilms, setFilms, setPromoFilm, setCurrentFilm, setSimilarFilms, setComments} from './films-data/films-data';
-import {requireAuthorization} from './user-process/user-process';
+import {requireAuthorization, setUserData} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
 import {redirectToRoute} from './action';
@@ -65,7 +65,7 @@ export const setFavouritePromoAction = createAsyncThunk(
       const {data} = await api.post<Film>(APIRoute.setFavorite(promoId, isFavorite));
       store.dispatch(setPromoFilm(data));
     } catch (error) {
-      errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.SignIn));
     }
   },
 );
@@ -77,7 +77,7 @@ export const setFavouriteCurrentAction = createAsyncThunk(
       const {data} = await api.post<Film>(APIRoute.setFavorite(currentFilmId, isFavorite));
       store.dispatch(setCurrentFilm(data));
     } catch (error) {
-      errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.SignIn));
     }
   },
 );
@@ -123,8 +123,9 @@ export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const {data: {name, avatarUrl}} = await api.get(APIRoute.Login);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(setUserData({name, avatarUrl}));
     } catch (error) {
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }

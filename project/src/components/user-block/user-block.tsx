@@ -3,10 +3,11 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import {selectAuthorizationStatus} from '../../store/user-process/selector';
+import {selectAuthorizationStatus, selectUsedData} from '../../store/user-process/selector';
 
 function UserBlock(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const userData = useAppSelector(selectUsedData);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ function UserBlock(): JSX.Element {
           <li className="user-block__item">
             <div className="user-block__avatar">
               <Link to={AppRoute.Favorite} style={{'display': 'block'}}>
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                <img src={userData?.avatarUrl} alt="User avatar" width="63" height="63"/>
               </Link>
             </div>
           </li>
