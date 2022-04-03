@@ -1,16 +1,13 @@
 import {MouseEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {setFavouritePromoAction} from '../../store/api-actions';
-import {selectAuthorizationStatus} from '../../store/user-process/selector';
 import {selectPromoFilms} from '../../store/films-data/selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 
 function PromoFilm(): JSX.Element {
-  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const promoFilm = useAppSelector(selectPromoFilms);
 
   const navigate = useNavigate();
@@ -22,7 +19,6 @@ function PromoFilm(): JSX.Element {
 
   const promoId = promoFilm.id;
   const isFavorite = promoFilm.isFavorite;
-  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const clickPlayHandler = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
@@ -64,7 +60,7 @@ function PromoFilm(): JSX.Element {
               </button>
               <button className="btn btn--list film-card__button" type="button" onClick={clickFavoriteHandler}>
                 <svg viewBox="0 0 19 20" width="19" height="20">
-                  {isFavorite && isAuth ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                  {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
                 </svg>
                 <span>My list</span>
               </button>
