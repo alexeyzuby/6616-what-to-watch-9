@@ -30,7 +30,7 @@ function App(): JSX.Element {
         element={<SignInScreen/>}
       />
       <Route
-        path={AppRoute.MyList}
+        path={AppRoute.Favorite}
         element={
           <PrivateRoute>
             <FavoriteScreen/>
