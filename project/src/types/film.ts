@@ -19,9 +19,3 @@ export type Film = {
   released: number,
   isFavorite: boolean,
 };
-
-export type currentFilm = {
-  data: Film,
-  similar: Film[],
-  comments: FilmComment[],
-};

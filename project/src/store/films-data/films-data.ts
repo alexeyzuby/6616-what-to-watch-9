@@ -5,8 +5,10 @@ import {NameSpace} from '../../const';
 const initialState: FilmsData = {
   films: [],
   favoriteFilms: [],
+  similarFilms: [],
   promoFilm: null,
   currentFilm: null,
+  comments: [],
   isDataLoaded: false,
 };
 
@@ -21,11 +23,17 @@ export const filmsData = createSlice({
     setFavoriteFilms: (state, action) => {
       state.favoriteFilms = action.payload;
     },
+    setSimilarFilms: (state, action) => {
+      state.similarFilms = action.payload;
+    },
     setPromoFilm: (state, action) => {
       state.promoFilm = action.payload;
     },
     setCurrentFilm: (state, action) => {
       state.currentFilm = action.payload;
+    },
+    setComments: (state, action) => {
+      state.comments = action.payload;
     },
     cleanCurrentFilm: (state) => {
       state.currentFilm = null;
@@ -33,4 +41,4 @@ export const filmsData = createSlice({
   },
 });
 
-export const {setFilms, setFavoriteFilms, setPromoFilm, setCurrentFilm, cleanCurrentFilm} = filmsData.actions;
+export const {setFilms, setFavoriteFilms, setSimilarFilms, setPromoFilm, setCurrentFilm, cleanCurrentFilm, setComments} = filmsData.actions;
