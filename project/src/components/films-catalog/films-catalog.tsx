@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
+import {selectFilms} from '../../store/films-data/selector';
 import GenresList from '../genres-list/genres-list';
 import FilmsList from '../films-list/films-list';
 import ShowMore from '../show-more/show-more';
-import {selectFilms} from '../../store/films-data/selector';
 
 export const INITIAL_GENRE = 'All genres';
 export const INITIAL_FILMS_COUNT = 8;

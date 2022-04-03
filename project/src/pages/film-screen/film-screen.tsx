@@ -1,4 +1,10 @@
+import {MouseEvent, useEffect} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
+import {AuthorizationStatus} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchCommentsAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, setFavouriteCurrentAction} from '../../store/api-actions';
+import {selectAuthorizationStatus} from '../../store/user-process/selector';
+import {selectComments, selectCurrentFilms, selectSimilarFilms} from '../../store/films-data/selector';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Logo from '../../components/logo/logo';
@@ -6,12 +12,6 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {AuthorizationStatus} from '../../const';
-import {selectAuthorizationStatus} from '../../store/user-process/selector';
-import {selectComments, selectCurrentFilms, selectSimilarFilms} from '../../store/films-data/selector';
-import {MouseEvent, useEffect} from 'react';
-import {fetchCommentsAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, setFavouriteCurrentAction} from '../../store/api-actions';
 
 const MAX_SIMILAR_COUNT = 4;
 
@@ -43,6 +43,7 @@ function FilmScreen(): JSX.Element {
   }
 
   const isFavorite = currentFilm.isFavorite;
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const clickPlayHandler = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
@@ -84,11 +85,11 @@ function FilmScreen(): JSX.Element {
                 </button>
                 <button className="btn btn--list film-card__button" type="button" onClick={clickFavoriteHandler}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                    {isFavorite && isAuth ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
                   </svg>
                   <span>My list</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
+                {isAuth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>

@@ -1,13 +1,13 @@
+import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchCurrentFilmAction} from '../../store/api-actions';
+import {selectCurrentFilms} from '../../store/films-data/selector';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {selectCurrentFilms} from '../../store/films-data/selector';
-import {useEffect} from 'react';
-import {fetchCurrentFilmAction} from '../../store/api-actions';
 
 function AddReviewScreen(): JSX.Element {
   const dispatch = useAppDispatch();

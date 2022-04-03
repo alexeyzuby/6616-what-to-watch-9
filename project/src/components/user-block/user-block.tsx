@@ -24,7 +24,7 @@ function UserBlock(): JSX.Element {
           <li className="user-block__item">
             <div className="user-block__avatar">
               <Link to={AppRoute.Favorite} style={{'display': 'block'}}>
-                <img src={userData?.avatarUrl} alt="User avatar" width="63" height="63"/>
+                <img src={`${userData ? userData.avatarUrl : 'img/avatar.jpg'}`} alt="User avatar" width="63" height="63"/>
               </Link>
             </div>
           </li>

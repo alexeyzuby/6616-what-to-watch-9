@@ -1,11 +1,11 @@
+import {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchCurrentFilmAction} from '../../store/api-actions';
+import {selectCurrentFilms} from '../../store/films-data/selector';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../../components/player/player';
-import {useParams} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {selectCurrentFilms} from '../../store/films-data/selector';
-import {useEffect} from 'react';
-import {fetchCurrentFilmAction} from '../../store/api-actions';
 
 function PlayerScreen(): JSX.Element {
   const dispatch = useAppDispatch();
