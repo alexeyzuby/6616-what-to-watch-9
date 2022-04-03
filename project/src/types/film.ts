@@ -1,5 +1,3 @@
-import {FilmComment} from './comment';
-
 export type Film = {
   id: number,
   name: string,

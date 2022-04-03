@@ -18,7 +18,7 @@ function PlayerScreen(): JSX.Element {
     if(currentFilmId) {
       dispatch(fetchCurrentFilmAction(currentFilmId));
     }
-  }, [currentFilmId]);
+  }, [currentFilmId, dispatch]);
 
   if (currentFilm === undefined) {
     return <NotFoundScreen/>;

@@ -12,7 +12,7 @@ function FavoriteScreen(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchFavoriteFilmsAction());
-  }, []);
+  }, [dispatch]);
 
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
 
