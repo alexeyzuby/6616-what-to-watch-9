@@ -3,9 +3,10 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks';
+import {selectFavoriteFilms} from '../../store/films-data/selector';
 
-function MyListScreen(): JSX.Element {
-  const {favoriteFilms} = useAppSelector(({FILMS}) => FILMS);
+function FavoriteScreen(): JSX.Element {
+  const favoriteFilms = useAppSelector(selectFavoriteFilms);
 
   return (
     <div className="user-page">
@@ -26,4 +27,4 @@ function MyListScreen(): JSX.Element {
   );
 }
 
-export default MyListScreen;
+export default FavoriteScreen;

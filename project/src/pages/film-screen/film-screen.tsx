@@ -1,7 +1,5 @@
-import {Link} from 'react-router-dom';
-import {useFilmId} from '../../hooks/use-film-id';
+import {Link, useParams} from 'react-router-dom';
 import {useFilm} from '../../hooks/use-film';
-import {useAuth} from '../../hooks/use-auth';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Logo from '../../components/logo/logo';
@@ -10,27 +8,30 @@ import FilmButtons from '../../components/film-buttons/film-buttons';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
-import {useFavorite} from '../../hooks/use-favorite';
+import {useAppSelector} from '../../hooks';
+import {AuthorizationStatus} from '../../const';
 
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
-  const isAuth = useAuth();
-  const selectedFilm = useFilm();
-  const selectedFilmId = useFilmId();
-  const isFavorite = useFavorite(selectedFilmId);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
-  if (selectedFilm === undefined) {
+  const params = useParams();
+
+  const currentFilmId = Number(params.id);
+  const currentFilm = useFilm(currentFilmId);
+
+  if (currentFilm === undefined) {
     return <NotFoundScreen/>;
   }
 
-  if (selectedFilm === null || selectedFilm.data.id !== selectedFilmId) {
+  if (currentFilm === null || currentFilm.data.id !== currentFilmId) {
     return <LoadingScreen/>;
   }
 
-  const similarFilmsList = selectedFilm.similar.filter((film) => film.id !== selectedFilm.data.id).slice(0, MAX_SIMILAR_COUNT);
+  const similarFilmsList = currentFilm.similar.filter((film) => film.id !== currentFilm.data.id).slice(0, MAX_SIMILAR_COUNT);
 
-  const {backgroundColor, backgroundImage, name, genre, released, id, posterImage} = selectedFilm.data;
+  const {backgroundColor, backgroundImage, name, genre, released, id, posterImage} = currentFilm.data;
 
   return (
     <>
@@ -52,8 +53,8 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
-                <FilmButtons id={id} isFavorite={isFavorite}/>
-                {isAuth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
+                <FilmButtons id={id}/>
+                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -64,7 +65,7 @@ function FilmScreen(): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
             <div className="film-card__desc">
-              <FilmTabs film={selectedFilm.data} comments={selectedFilm.comments}/>
+              <FilmTabs film={currentFilm.data} comments={currentFilm.comments}/>
             </div>
           </div>
         </div>

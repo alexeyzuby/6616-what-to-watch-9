@@ -1,22 +1,24 @@
 import {useFilm} from '../../hooks/use-film';
-import {useFilmId} from '../../hooks/use-film-id';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../../components/player/player';
+import {useParams} from 'react-router-dom';
 
 function PlayerScreen(): JSX.Element {
-  const selectedFilm = useFilm();
-  const selectedFilmId = useFilmId();
+  const params = useParams();
 
-  if (selectedFilm === undefined) {
+  const currentFilmId = Number(params.id);
+  const currentFilm = useFilm(currentFilmId);
+
+  if (currentFilm === undefined) {
     return <NotFoundScreen/>;
   }
 
-  if (selectedFilm === null || selectedFilm.data.id !== selectedFilmId) {
+  if (currentFilm === null || currentFilm.data.id !== currentFilmId) {
     return <LoadingScreen/>;
   }
 
-  const {videoLink, name} = selectedFilm.data;
+  const {videoLink, name} = currentFilm.data;
 
   return (
     <Player name={name} link={videoLink}/>

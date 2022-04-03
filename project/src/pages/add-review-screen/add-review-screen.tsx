@@ -1,6 +1,5 @@
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {useFilm} from '../../hooks/use-film';
-import {useFilmId} from '../../hooks/use-film-id';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
@@ -8,18 +7,20 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function AddReviewScreen(): JSX.Element {
-  const selectedFilm = useFilm();
-  const selectedFilmId = useFilmId();
+  const params = useParams();
 
-  if (selectedFilm === undefined) {
+  const currentFilmId = Number(params.id);
+  const currentFilm = useFilm(currentFilmId);
+
+  if (currentFilm === undefined) {
     return <NotFoundScreen/>;
   }
 
-  if (selectedFilm === null || selectedFilm.data.id !== selectedFilmId) {
+  if (currentFilm === null || currentFilm.data.id !== currentFilmId) {
     return <LoadingScreen/>;
   }
 
-  const {backgroundColor, backgroundImage, name, id, posterImage} = selectedFilm.data;
+  const {backgroundColor, backgroundImage, name, id, posterImage} = currentFilm.data;
 
   return (
     <section className="film-card film-card--full" style={{backgroundColor: backgroundColor}}>

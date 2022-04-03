@@ -5,14 +5,15 @@ import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
-import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+import FavoriteScreen from '../../pages/favorite-screen/favorite-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import {selectIsDataLoaded} from '../../store/films-data/selector';
 
 function App(): JSX.Element {
-  const {isDataLoaded} = useAppSelector(({FILMS}) => FILMS);
+  const isDataLoaded = useAppSelector(selectIsDataLoaded);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;
@@ -32,7 +33,7 @@ function App(): JSX.Element {
         path={AppRoute.MyList}
         element={
           <PrivateRoute>
-            <MyListScreen/>
+            <FavoriteScreen/>
           </PrivateRoute>
         }
       />

@@ -1,6 +1,6 @@
 import {store} from '../store';
 import {AuthorizationStatus} from '../const';
-import {Film, SelectedFilm} from './film';
+import {Film, currentFilm} from './film';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus,
@@ -10,7 +10,7 @@ export type FilmsData = {
   films: Film[],
   favoriteFilms: Film[],
   promoFilm: Film | null,
-  selectedFilm: SelectedFilm | null | undefined,
+  currentFilm: currentFilm | null | undefined,
   isDataLoaded: boolean,
 };
 

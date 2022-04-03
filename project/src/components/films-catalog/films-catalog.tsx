@@ -3,6 +3,7 @@ import {useAppSelector} from '../../hooks';
 import GenresList from '../genres-list/genres-list';
 import FilmsList from '../films-list/films-list';
 import ShowMore from '../show-more/show-more';
+import {selectFilms} from '../../store/films-data/selector';
 
 export const INITIAL_GENRE = 'All genres';
 export const INITIAL_FILMS_COUNT = 8;
@@ -11,7 +12,7 @@ function FilmsCatalog(): JSX.Element {
   const [currentGenre, setCurrentGenre] = useState(INITIAL_GENRE);
   const [maxFilmsCount, setMaxFilmsCount] = useState(INITIAL_FILMS_COUNT);
 
-  const {films} = useAppSelector(({FILMS}) => FILMS);
+  const films = useAppSelector(selectFilms);
 
   const sortedFilms = currentGenre === INITIAL_GENRE ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set([INITIAL_GENRE, ...Array.from(films, ({genre}) => genre)])];

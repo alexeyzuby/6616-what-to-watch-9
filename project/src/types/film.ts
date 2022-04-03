@@ -20,7 +20,7 @@ export type Film = {
   isFavorite: boolean,
 };
 
-export type SelectedFilm = {
+export type currentFilm = {
   data: Film,
   similar: Film[],
   comments: FilmComment[],

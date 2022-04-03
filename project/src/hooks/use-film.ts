@@ -1,25 +1,25 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useAppSelector} from './index';
-import {useFilmId} from './use-film-id';
-import {fetchSelectedFilmAction} from '../store/api-actions';
+import {fetchCurrentFilmAction} from '../store/api-actions';
 import {cleanCurrentFilm} from '../store/films-data/films-data';
+import {selectCurrentFilms} from '../store/films-data/selector';
 
-export const useFilm = () => {
-  const {selectedFilm} = useAppSelector(({FILMS}) => FILMS);
+export const useFilm = (filmId: number) => {
+  const currentFilm = useAppSelector(selectCurrentFilms);
 
-  const selectedFilmId = useFilmId();
+  const currentFilmId = filmId;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (selectedFilm === null || selectedFilm?.data.id !== selectedFilmId) {
-      dispatch(fetchSelectedFilmAction(selectedFilmId));
+    if (currentFilm === null || currentFilm?.data.id !== currentFilmId) {
+      dispatch(fetchCurrentFilmAction(currentFilmId));
     }
-  }, [selectedFilm, selectedFilmId, dispatch]);
+  }, [currentFilm, currentFilmId, dispatch]);
 
   useEffect(() => () => {
     dispatch(cleanCurrentFilm());
   }, [dispatch]);
 
-  return selectedFilm;
+  return currentFilm;
 };

@@ -4,7 +4,7 @@ import {APIRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {FilmComment, UserComment} from '../types/comment';
 import {AuthData, UserData} from '../types/user';
-import {setFavoriteFilms, setFilms, setPromoFilm, setSelectedFilm} from './films-data/films-data';
+import {setFavoriteFilms, setFilms, setPromoFilm, setCurrentFilm} from './films-data/films-data';
 import {requireAuthorization} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
@@ -58,21 +58,21 @@ export const fetchPromoFilmAction = createAsyncThunk(
   },
 );
 
-export const fetchSelectedFilmAction = createAsyncThunk(
-  'data/fetchSelectedFilm',
+export const fetchCurrentFilmAction = createAsyncThunk(
+  'data/fetchCurrentFilm',
   async (id: number) => {
     try {
       const {data: film} = await api.get<Film>(APIRoute.Film(id));
       const {data: similar} = await api.get<Film[]>(APIRoute.Similar(id));
       const {data: comments} = await api.get<FilmComment[]>(APIRoute.Comments(id));
-      store.dispatch(setSelectedFilm({
+      store.dispatch(setCurrentFilm({
         data: film,
         similar,
         comments,
       }));
     } catch (error) {
       errorHandle(error);
-      store.dispatch(setSelectedFilm(undefined));
+      store.dispatch(setCurrentFilm(undefined));
     }
   },
 );
@@ -96,7 +96,6 @@ export const checkAuthAction = createAsyncThunk(
       await api.get(APIRoute.Login);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },

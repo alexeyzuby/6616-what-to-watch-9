@@ -1,25 +1,16 @@
 import {MouseEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
-import {setFavoriteStateAction} from '../../store/api-actions';
 
 type FilmButtonsPromo = {
   id: number,
-  isFavorite: boolean,
 };
 
-function FilmButtons({id, isFavorite}: FilmButtonsPromo): JSX.Element {
+function FilmButtons({id}: FilmButtonsPromo): JSX.Element {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const clickPlayHandler = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     navigate(`/player/${id}`);
-  };
-
-  const clickListHandler = (evt: MouseEvent<HTMLElement>) => {
-    evt.preventDefault();
-    dispatch(setFavoriteStateAction({id, isFavorite}));
   };
 
   return (
@@ -30,9 +21,9 @@ function FilmButtons({id, isFavorite}: FilmButtonsPromo): JSX.Element {
         </svg>
         <span>Play</span>
       </button>
-      <button className="btn btn--list film-card__button" type="button" onClick={clickListHandler}>
+      <button className="btn btn--list film-card__button" type="button">
         <svg viewBox="0 0 19 20" width="19" height="20">
-          {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+          <use xlinkHref="#add"/>
         </svg>
         <span>My list</span>
       </button>

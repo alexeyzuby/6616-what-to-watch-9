@@ -6,7 +6,7 @@ const initialState: FilmsData = {
   films: [],
   favoriteFilms: [],
   promoFilm: null,
-  selectedFilm: null,
+  currentFilm: null,
   isDataLoaded: false,
 };
 
@@ -24,13 +24,13 @@ export const filmsData = createSlice({
     setPromoFilm: (state, action) => {
       state.promoFilm = action.payload;
     },
-    setSelectedFilm: (state, action) => {
-      state.selectedFilm = action.payload;
+    setCurrentFilm: (state, action) => {
+      state.currentFilm = action.payload;
     },
     cleanCurrentFilm: (state) => {
-      state.selectedFilm = null;
+      state.currentFilm = null;
     },
   },
 });
 
-export const {setFilms, setFavoriteFilms, setPromoFilm, setSelectedFilm, cleanCurrentFilm} = filmsData.actions;
+export const {setFilms, setFavoriteFilms, setPromoFilm, setCurrentFilm, cleanCurrentFilm} = filmsData.actions;
