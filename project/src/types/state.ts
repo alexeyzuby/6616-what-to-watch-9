@@ -8,6 +8,7 @@ export type UserProcess = {
 
 export type FilmsData = {
   films: Film[],
+  favoriteFilms: Film[],
   promoFilm: Film | null,
   selectedFilm: SelectedFilm | null | undefined,
   isDataLoaded: boolean,

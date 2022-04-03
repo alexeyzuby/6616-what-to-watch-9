@@ -10,13 +10,15 @@ import FilmButtons from '../../components/film-buttons/film-buttons';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
+import {useFavorite} from '../../hooks/use-favorite';
 
 const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
+  const isAuth = useAuth();
   const selectedFilm = useFilm();
   const selectedFilmId = useFilmId();
-  const isAuth = useAuth();
+  const isFavorite = useFavorite(selectedFilmId);
 
   if (selectedFilm === undefined) {
     return <NotFoundScreen/>;
@@ -50,7 +52,7 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
-                <FilmButtons id={id}/>
+                <FilmButtons id={id} isFavorite={isFavorite}/>
                 {isAuth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

@@ -2,12 +2,15 @@ import {Film} from '../../types/film';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import FilmButtons from '../film-buttons/film-buttons';
+import {useFavorite} from '../../hooks/use-favorite';
 
 type PromoCardProps = {
   promoFilm: Film,
 }
 
 function PromoCard({promoFilm}: PromoCardProps): JSX.Element {
+  const isFavorite = useFavorite(promoFilm.id);
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -30,7 +33,7 @@ function PromoCard({promoFilm}: PromoCardProps): JSX.Element {
               <span className="film-card__year">{promoFilm.released}</span>
             </p>
             <div className="film-card__buttons">
-              <FilmButtons id={promoFilm.id}/>
+              <FilmButtons id={promoFilm.id} isFavorite={isFavorite}/>
             </div>
           </div>
         </div>

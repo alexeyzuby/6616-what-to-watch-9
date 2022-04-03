@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import {store} from './store';
-import {checkAuthAction, fetchFilmsAction, fetchPromoFilmAction} from './store/api-actions';
+import {checkAuthAction, fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoFilmAction} from './store/api-actions';
 import browserHistory from './browser-history';
 import HistoryRouter from './components/history-route/history-route';
 import App from './components/app/app';
@@ -11,6 +11,7 @@ import App from './components/app/app';
 import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(fetchFilmsAction());
+store.dispatch(fetchFavoriteFilmsAction());
 store.dispatch(fetchPromoFilmAction());
 store.dispatch(checkAuthAction());
 

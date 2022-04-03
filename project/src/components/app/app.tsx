@@ -12,7 +12,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 function App(): JSX.Element {
-  const {isDataLoaded, films} = useAppSelector(({FILMS}) => FILMS);
+  const {isDataLoaded} = useAppSelector(({FILMS}) => FILMS);
 
   if (!isDataLoaded) {
     return <LoadingScreen/>;
@@ -32,7 +32,7 @@ function App(): JSX.Element {
         path={AppRoute.MyList}
         element={
           <PrivateRoute>
-            <MyListScreen films={films}/>
+            <MyListScreen/>
           </PrivateRoute>
         }
       />

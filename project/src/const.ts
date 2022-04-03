@@ -26,10 +26,12 @@ export enum NameSpace {
 
 export const APIRoute = {
   Films: '/films',
+  Favorite: '/favorite',
   Promo: '/promo',
   Login: '/login',
   Logout: '/logout',
   Film: (id: number) => `/films/${id}`,
   Similar: (id: number) => `/films/${id}/similar`,
   Comments: (id: number) => `/comments/${id}`,
+  setFavorite: (id: number, isFavorite: boolean) => `/favorite/${id}/${isFavorite ? 0 : 1}`,
 };

@@ -4,6 +4,7 @@ import {NameSpace} from '../../const';
 
 const initialState: FilmsData = {
   films: [],
+  favoriteFilms: [],
   promoFilm: null,
   selectedFilm: null,
   isDataLoaded: false,
@@ -17,6 +18,9 @@ export const filmsData = createSlice({
       state.films = action.payload;
       state.isDataLoaded = true;
     },
+    setFavoriteFilms: (state, action) => {
+      state.favoriteFilms = action.payload;
+    },
     setPromoFilm: (state, action) => {
       state.promoFilm = action.payload;
     },
@@ -29,4 +33,4 @@ export const filmsData = createSlice({
   },
 });
 
-export const {setFilms, setPromoFilm, setSelectedFilm, cleanCurrentFilm} = filmsData.actions;
+export const {setFilms, setFavoriteFilms, setPromoFilm, setSelectedFilm, cleanCurrentFilm} = filmsData.actions;

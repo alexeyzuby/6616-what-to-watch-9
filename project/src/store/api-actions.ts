@@ -4,7 +4,7 @@ import {APIRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {FilmComment, UserComment} from '../types/comment';
 import {AuthData, UserData} from '../types/user';
-import {setFilms, setPromoFilm, setSelectedFilm} from './films-data/films-data';
+import {setFavoriteFilms, setFilms, setPromoFilm, setSelectedFilm} from './films-data/films-data';
 import {requireAuthorization} from './user-process/user-process';
 import {dropToken, saveToken} from '../services/token';
 import {errorHandle} from '../services/error-handle';
@@ -16,6 +16,30 @@ export const fetchFilmsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(setFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk(
+  'data/fetchFavoriteFilms',
+  async () => {
+    try {
+      const {data} = await api.get<Film[]>(APIRoute.Favorite);
+      store.dispatch(setFavoriteFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const setFavoriteStateAction = createAsyncThunk(
+  'data/setFavoriteState',
+  async ({id, isFavorite}: { id: number, isFavorite: boolean }) => {
+    try {
+      await api.post<Film>(APIRoute.setFavorite(id, isFavorite));
+      store.dispatch(fetchFavoriteFilmsAction());
     } catch (error) {
       errorHandle(error);
     }
