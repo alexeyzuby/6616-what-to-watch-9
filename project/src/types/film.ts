@@ -17,4 +17,3 @@ export type Film = {
   released: number,
   isFavorite: boolean,
 };
-

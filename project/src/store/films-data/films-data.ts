@@ -4,10 +4,11 @@ import {NameSpace} from '../../const';
 
 const initialState: FilmsData = {
   films: [],
+  favoriteFilms: [],
+  similarFilms: [],
   promoFilm: null,
   currentFilm: null,
-  similarFilms: [],
-  reviews: [],
+  comments: [],
   isDataLoaded: false,
 };
 
@@ -15,21 +16,24 @@ export const filmsData = createSlice({
   name: NameSpace.Films,
   initialState,
   reducers: {
-    getFilms: (state, action) => {
+    setFilms: (state, action) => {
       state.films = action.payload;
       state.isDataLoaded = true;
     },
-    getPromoFilm: (state, action) => {
-      state.promoFilm = action.payload;
+    setFavoriteFilms: (state, action) => {
+      state.favoriteFilms = action.payload;
     },
-    getCurrentFilm: (state, action) => {
-      state.currentFilm = action.payload;
-    },
-    getSimilarFilms: (state, action) => {
+    setSimilarFilms: (state, action) => {
       state.similarFilms = action.payload;
     },
-    getReviews: (state, action) => {
-      state.reviews = action.payload;
+    setPromoFilm: (state, action) => {
+      state.promoFilm = action.payload;
+    },
+    setCurrentFilm: (state, action) => {
+      state.currentFilm = action.payload;
+    },
+    setComments: (state, action) => {
+      state.comments = action.payload;
     },
     cleanCurrentFilm: (state) => {
       state.currentFilm = null;
@@ -37,4 +41,4 @@ export const filmsData = createSlice({
   },
 });
 
-export const {getFilms, getPromoFilm, getCurrentFilm, getSimilarFilms, getReviews, cleanCurrentFilm} = filmsData.actions;
+export const {setFilms, setFavoriteFilms, setSimilarFilms, setPromoFilm, setCurrentFilm, cleanCurrentFilm, setComments} = filmsData.actions;

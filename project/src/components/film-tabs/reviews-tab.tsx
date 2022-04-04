@@ -1,28 +1,28 @@
-import {Review} from '../../types/review';
+import {FilmComment} from '../../types/comment';
 import FilmReview from '../film-review/film-review';
 
 const REVIEWS_COLS_COUNT = 2;
 const NO_REVIEWS_TEXT_COLOR = '#382c2a';
 
 type ReviewsTabProps = {
-  reviews: Review[],
+  comments: FilmComment[],
 }
 
-function ReviewsTab({reviews}: ReviewsTabProps): JSX.Element {
-  if (reviews.length === 0) {
+function ReviewsTab({comments}: ReviewsTabProps): JSX.Element {
+  if (comments.length === 0) {
     return <p style={{color: NO_REVIEWS_TEXT_COLOR}}>No reviews...</p>;
   }
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 0).map((review) => (
-          <FilmReview key={review.id} review={review}/>
+        {comments.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 0).map((comment) => (
+          <FilmReview key={comment.id} comment={comment}/>
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {reviews.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 1).map((review) => (
-          <FilmReview key={review.id} review={review}/>
+        {comments.filter((el, index) => (index % REVIEWS_COLS_COUNT) === 1).map((comment) => (
+          <FilmReview key={comment.id} comment={comment}/>
         ))}
       </div>
     </div>
