@@ -7,7 +7,7 @@ describe('Reducer: userProcess', () => {
   const initialState: UserProcess = {
     authorizationStatus: AuthorizationStatus.Unknown,
     userData: null,
-  }
+  };
 
   const fakeUserData = makeFakeUserData();
 

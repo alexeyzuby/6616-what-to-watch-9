@@ -9,14 +9,14 @@ import {makeFakeFilm, makeFakeFilms} from '../../utils/mocks';
 import App from './app';
 
 const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares)
+const mockStore = configureMockStore(middlewares);
 
 const fakeFilm = makeFakeFilm(1);
 const fakeFilms = makeFakeFilms();
 
 const store = mockStore({
   [NameSpace.User]: {
-    authorizationStatus: AuthorizationStatus.Auth
+    authorizationStatus: AuthorizationStatus.Auth,
   },
   [NameSpace.Films]: {
     films: fakeFilms,
@@ -25,7 +25,7 @@ const store = mockStore({
     promoFilm: fakeFilm,
     currentFilm: fakeFilm,
     isDataLoaded: true,
-  }
+  },
 });
 
 const history = createMemoryHistory();
@@ -51,7 +51,7 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Play/i)).toBeInTheDocument();
     expect(screen.getByText(/My list/i)).toBeInTheDocument();
 
-    expect(screen.getByText(fakeFilm.name));
+    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
 
   it('should render "SignInScreen" when user navigate to "/login"', () => {
@@ -81,7 +81,7 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Details/i)).toBeInTheDocument();
     expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
 
-    expect(screen.getByText(fakeFilm.name));
+    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
 
   it('should render "AddReviewScreen" when user navigate to "/films/1/review"', () => {
@@ -93,7 +93,7 @@ describe('Application Routing', () => {
     expect(screen.getByPlaceholderText(/Review text/i)).toBeInTheDocument();
     expect(screen.getByRole('button')).toHaveTextContent(/Post/i);
 
-    expect(screen.getByText(fakeFilm.name));
+    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
 
   it('should render "PlayerScreen" when user navigate to "/player/1"', () => {
@@ -101,11 +101,11 @@ describe('Application Routing', () => {
 
     render(fakeApp);
 
-    expect(screen.getByText(/Exit/i));
-    expect(screen.getByText(/Play/i));
-    expect(screen.getByText(/Full screen/i));
+    expect(screen.getByText(/Exit/i)).toBeInTheDocument();
+    expect(screen.getByText(/Play/i)).toBeInTheDocument();
+    expect(screen.getByText(/Full screen/i)).toBeInTheDocument();
 
-    expect(screen.getByText(fakeFilm.name));
+    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {

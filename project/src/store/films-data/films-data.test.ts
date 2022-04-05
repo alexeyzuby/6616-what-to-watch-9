@@ -11,7 +11,7 @@ describe('Reducer: filmsData', () => {
     currentFilm: null,
     comments: [],
     isDataLoaded: false,
-  }
+  };
 
   const fakeFilm = makeFakeFilm();
   const fakeFilms = makeFakeFilms();

@@ -6,5 +6,10 @@ import '@testing-library/jest-dom';
 
 // Fix issue with video
 Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
-  set: () => {},
+  set: () => {
+    // do nothing.
+  },
+  get: () => {
+    // do nothing.
+  },
 });
