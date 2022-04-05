@@ -24,7 +24,7 @@ describe('Async actions', () => {
 
   const mockStore = configureMockStore<State, Action, ThunkDispatch<State, typeof api, Action>>(middlewares);
 
-  it('should dispatch setFilms when GET /films', async () => {
+  it('should dispatch "setFilms" when GET "/films"', async () => {
     mockApi.onGet(APIRoute.Films).reply(200, fakeFilms);
 
     const store = mockStore();
@@ -37,7 +37,7 @@ describe('Async actions', () => {
     expect(setFilmsAction).toMatchObject({payload: fakeFilms});
   });
 
-  it('should dispatch setFavoriteFilms when GET /favorite', async () => {
+  it('should dispatch "setFavoriteFilms" when GET "/favorite"', async () => {
     mockApi.onGet(APIRoute.Favorite).reply(200, fakeFilms);
 
     const store = mockStore();
@@ -50,7 +50,7 @@ describe('Async actions', () => {
     expect(setFavoriteFilmsAction).toMatchObject({payload: fakeFilms});
   });
 
-  it('should dispatch setSimilarFilms when GET /films/{filmId}/similar', async () => {
+  it('should dispatch "setSimilarFilms" when GET "/films/{filmId}/similar"', async () => {
     mockApi.onGet(`${APIRoute.Films}/${fakeFilm.id}/similar`).reply(200, fakeFilms);
 
     const store = mockStore();
@@ -63,7 +63,7 @@ describe('Async actions', () => {
     expect(setSimilarFilmsAction).toMatchObject({payload: fakeFilms});
   });
 
-  it('should dispatch setComments when GET /comments/{filmId}', async () => {
+  it('should dispatch "setComments" when GET "/comments/{filmId}"', async () => {
     mockApi.onGet(`${APIRoute.Comments}/${fakeFilm.id}`).reply(200, fakeComments);
 
     const store = mockStore();
@@ -76,7 +76,7 @@ describe('Async actions', () => {
     expect(setCommentsAction).toMatchObject({payload: fakeComments});
   });
 
-  it('should dispatch setPromoFilm when GET /promo', async () => {
+  it('should dispatch "setPromoFilm" when GET "/promo"', async () => {
     mockApi.onGet(APIRoute.Promo).reply(200, fakeFilm);
 
     const store = mockStore();
@@ -89,7 +89,7 @@ describe('Async actions', () => {
     expect(setPromoFilmAction).toMatchObject({payload: fakeFilm});
   });
 
-  it('should dispatch setCurrentFilm when GET /films/{filmId} return 200', async () => {
+  it('should dispatch "setCurrentFilm" when GET "/films/{filmId}" return 200', async () => {
     mockApi.onGet(`${APIRoute.Films}/${fakeFilm.id}`).reply(200, fakeFilm);
 
     const store = mockStore();
@@ -102,7 +102,7 @@ describe('Async actions', () => {
     expect(setCurrentFilmAction).toMatchObject({payload: fakeFilm});
   });
 
-  it('should dispatch setCurrentFilm when GET /films/{filmId} return 404', async () => {
+  it('should dispatch "setCurrentFilm" when GET "/films/{filmId}" return 404', async () => {
     mockApi.onGet(`${APIRoute.Films}/${fakeFilm.id}`).reply(200, undefined);
 
     const store = mockStore();
@@ -115,7 +115,7 @@ describe('Async actions', () => {
     expect(setCurrentFilmAction).toMatchObject({payload: undefined});
   });
 
-  it('should dispatch setPromoFilm when POST /favorite/{filmId}/{status} return 200', async () => {
+  it('should dispatch "setPromoFilm" when POST "/favorite/{filmId}/{status}" return 200', async () => {
     const promoId = fakeFilm.id;
     const isFavorite = fakeFilm.isFavorite;
 
@@ -131,7 +131,7 @@ describe('Async actions', () => {
     expect(setPromoFilmAction).toMatchObject({payload: fakeFilm});
   });
 
-  it('should dispatch redirectToRoute when POST /favorite/{promoId}/{status} return 401', async () => {
+  it('should dispatch "redirectToRoute" when POST "/favorite/{promoId}/{status}" return 401', async () => {
     const promoId = fakeFilm.id;
     const isFavorite = fakeFilm.isFavorite;
 
@@ -144,7 +144,7 @@ describe('Async actions', () => {
     expect(actions).toContain(redirectToRoute.toString());
   });
 
-  it('should dispatch setCurrentFilm when POST /favorite/{filmId}/{status} return 200', async () => {
+  it('should dispatch "setCurrentFilm" when POST "/favorite/{filmId}/{status}" return 200', async () => {
     const currentFilmId = fakeFilm.id;
     const isFavorite = fakeFilm.isFavorite;
 
@@ -160,7 +160,7 @@ describe('Async actions', () => {
     expect(setCurrentFilmFilmAction).toMatchObject({payload: fakeFilm});
   });
 
-  it('should dispatch redirectToRoute when POST /favorite/{currentFilmId}/{status} return 401', async () => {
+  it('should dispatch "redirectToRoute" when POST "/favorite/{currentFilmId}/{status}" return 401', async () => {
     const currentFilmId = fakeFilm.id;
     const isFavorite = fakeFilm.isFavorite;
 
@@ -173,7 +173,7 @@ describe('Async actions', () => {
     expect(actions).toContain(redirectToRoute.toString());
   });
 
-  it('should dispatch requireAuthorization with "AUTH" and receive user data when GET /login return 200', async () => {
+  it('should dispatch "requireAuthorization" with "AUTH" and receive user data when GET "/login" return 200', async () => {
     const {avatarUrl, name} = fakeUserData;
 
     mockApi.onGet(APIRoute.Login).reply(200, fakeUserData);
@@ -192,7 +192,7 @@ describe('Async actions', () => {
     expect(setUserDataAction).toMatchObject({payload: {avatarUrl, name}});
   });
 
-  it('should dispatch requireAuthorization with "NO_AUTH" when GET /login return 401', async () => {
+  it('should dispatch "requireAuthorization" with "NO_AUTH" when GET "/login" return 401', async () => {
     mockApi.onGet(APIRoute.Login).reply(401, []);
 
     const store = mockStore();
@@ -205,7 +205,7 @@ describe('Async actions', () => {
     expect(requireAuthorizationAction).toMatchObject({payload: AuthorizationStatus.NoAuth});
   });
 
-  it('should dispatch requireAuthorization with "AUTH" when POST /login return 200', async () => {
+  it('should dispatch "requireAuthorization" with "AUTH" when POST "/login" return 200', async () => {
     const fakeUser: AuthData = {email: 'test@test.ru', password: '123456'};
 
     mockApi.onPost(APIRoute.Login).reply(200, {token: 'secret'});
@@ -224,7 +224,7 @@ describe('Async actions', () => {
     expect(Storage.prototype.setItem).toBeCalledWith('wtw-token', 'secret');
   });
 
-  it('should dispatch requireAuthorization with "NO_AUTH" when POST /login return 400', async () => {
+  it('should dispatch "requireAuthorization" with "NO_AUTH" when POST "/login" return 400', async () => {
     const fakeUser: AuthData = {email: 'test@test.ru', password: '123456'};
 
     mockApi.onPost(APIRoute.Login).reply(400, {token: 'secret'});
@@ -239,7 +239,7 @@ describe('Async actions', () => {
     expect(requireAuthorizationAction).toMatchObject({payload: AuthorizationStatus.NoAuth});
   });
 
-  it('should dispatch requireAuthorization and setPromoFilm when Delete /logout', async () => {
+  it('should dispatch "requireAuthorization" and "setPromoFilm" when Delete /logout', async () => {
     mockApi.onDelete(APIRoute.Logout).reply(204);
 
     const store = mockStore();
