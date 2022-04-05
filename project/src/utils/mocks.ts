@@ -1,7 +1,7 @@
 import faker from 'faker';
 import {Film} from '../types/film';
 import {UserData} from '../types/user';
-import {FilmComment} from '../types/comment';
+import {FilmComment, UserComment} from '../types/comment';
 
 const ID_MAX_COUNT = 10;
 const RATING_MAX_COUNT = 10;
@@ -11,6 +11,7 @@ const RUNTIME_MAX_COUNT = 199;
 const SCORE_MAX_COUNT = 999;
 const RELEASED_DATE_START = 1960;
 const RELEASED_DATE_MAX = 62;
+const FAKE_ARRAY_LENGTH = 4;
 
 const generateRandomName = () => `${faker.name.firstName()} ${faker.name.lastName()}`;
 
@@ -45,6 +46,12 @@ export const makeFakeFilmComment = (id?: number): FilmComment => ({
   },
 });
 
+export const makeFakeUserComment = (): UserComment => ({
+  id: faker.datatype.number(ID_MAX_COUNT),
+  comment: faker.lorem.paragraph(DESCRIPTION_MAX_COUNT),
+  rating: faker.datatype.number(RATING_MAX_COUNT),
+});
+
 export const makeFakeUserData = (): UserData => ({
   id: faker.datatype.number(ID_MAX_COUNT),
   email: faker.internet.email(),
@@ -53,5 +60,5 @@ export const makeFakeUserData = (): UserData => ({
   token: faker.lorem.word(),
 });
 
-export const makeFakeFilms = (): Film[] => new Array(4).fill(null).map((item, index) => makeFakeFilm(++index));
-export const makeFakeComments = (): FilmComment[] => new Array(4).fill(null).map((item, index) => makeFakeFilmComment(++index));
+export const makeFakeFilms = (): Film[] => new Array(FAKE_ARRAY_LENGTH).fill(null).map((item, index) => makeFakeFilm(++index));
+export const makeFakeComments = (): FilmComment[] => new Array(FAKE_ARRAY_LENGTH).fill(null).map((item, index) => makeFakeFilmComment(++index));
