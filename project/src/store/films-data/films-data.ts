@@ -35,10 +35,7 @@ export const filmsData = createSlice({
     setComments: (state, action) => {
       state.comments = action.payload;
     },
-    cleanCurrentFilm: (state) => {
-      state.currentFilm = null;
-    },
   },
 });
 
-export const {setFilms, setFavoriteFilms, setSimilarFilms, setPromoFilm, setCurrentFilm, cleanCurrentFilm, setComments} = filmsData.actions;
+export const {setFilms, setFavoriteFilms, setSimilarFilms, setPromoFilm, setCurrentFilm, setComments} = filmsData.actions;
