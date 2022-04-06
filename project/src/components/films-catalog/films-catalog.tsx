@@ -4,9 +4,7 @@ import {selectFilms} from '../../store/films-data/selector';
 import GenresList from '../genres-list/genres-list';
 import FilmsList from '../films-list/films-list';
 import ShowMore from '../show-more/show-more';
-
-export const INITIAL_GENRE = 'All genres';
-export const INITIAL_FILMS_COUNT = 8;
+import {INITIAL_FILMS_COUNT, INITIAL_GENRE} from '../../const';
 
 function FilmsCatalog(): JSX.Element {
   const [currentGenre, setCurrentGenre] = useState(INITIAL_GENRE);

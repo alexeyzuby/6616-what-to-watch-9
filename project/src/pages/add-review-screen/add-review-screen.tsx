@@ -26,7 +26,7 @@ function AddReviewScreen(): JSX.Element {
     return <NotFoundScreen/>;
   }
 
-  if (currentFilm === null || currentFilm.id !== currentFilmId) {
+  if (currentFilm === null) {
     return <LoadingScreen/>;
   }
 

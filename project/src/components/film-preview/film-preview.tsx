@@ -35,7 +35,7 @@ function FilmPreview({src, poster, isActive, isMuted}: FilmPreviewProps): JSX.El
   }, [isActive]);
 
   return (
-    <video src={src} poster={poster} height={VIDEO_HEIGHT} ref={previewRef} muted={isMuted} loop/>
+    <video src={src} poster={poster} height={VIDEO_HEIGHT} ref={previewRef} data-testid="video" muted={isMuted} loop/>
   );
 }
 

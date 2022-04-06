@@ -4,8 +4,8 @@ import {useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
 import {addCommentAction} from '../../store/api-actions';
 import RatingInput from './rating-input';
+import {MAX_FILM_RATING} from '../../const';
 
-const MAX_SCORE = 10;
 const MIN_REVIEW_LENGTH = 50;
 const MAX_REVIEW_LENGTH = 400;
 
@@ -41,7 +41,7 @@ function ReviewForm(): JSX.Element {
     <form action="#" className="add-review__form" onSubmit={submitHandler}>
       <div className="rating">
         <div className="rating__stars">
-          {Array.from(Array(MAX_SCORE), (element, index) => (
+          {Array.from(Array(MAX_FILM_RATING), (element, index) => (
             <RatingInput
               key={index + 1}
               value={index + 1}

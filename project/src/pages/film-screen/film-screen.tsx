@@ -1,6 +1,6 @@
 import {MouseEvent, useEffect} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, MAX_SIMILAR_COUNT} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchCommentsAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, setFavouriteCurrentAction} from '../../store/api-actions';
 import {selectAuthorizationStatus} from '../../store/user-process/selector';
@@ -12,8 +12,6 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
-
-const MAX_SIMILAR_COUNT = 4;
 
 function FilmScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -38,7 +36,7 @@ function FilmScreen(): JSX.Element {
     return <NotFoundScreen/>;
   }
 
-  if (currentFilm === null || currentFilm.id !== currentFilmId) {
+  if (currentFilm === null) {
     return <LoadingScreen/>;
   }
 
@@ -77,19 +75,19 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{currentFilm.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={clickPlayHandler}>
+                <button className="btn btn--play film-card__button" type="button" data-testid="play" onClick={clickPlayHandler}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={clickFavoriteHandler}>
+                <button className="btn btn--list film-card__button" type="button" data-testid="favorite" onClick={clickFavoriteHandler}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     {isFavorite && isAuth ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
                   </svg>
                   <span>My list</span>
                 </button>
-                {isAuth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>}
+                {isAuth && <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button" data-testid="review">Add review</Link>}
               </div>
             </div>
           </div>

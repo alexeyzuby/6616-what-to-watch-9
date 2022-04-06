@@ -18,7 +18,7 @@ function GenresList({genres, currentGenre, setCurrentGenre, setMaxFilmCount}: Ge
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
         <li className={`catalog__genres-item${genre === currentGenre ? ' catalog__genres-item--active' : ''}`} key={genre}>
-          <a href="#" className="catalog__genres-link" onClick={(evt) => genreClickHandler(evt, genre)}>{genre}</a>
+          <a href="#" className="catalog__genres-link" data-testid="genre" onClick={(evt) => genreClickHandler(evt, genre)}>{genre}</a>
         </li>
       ))}
     </ul>
