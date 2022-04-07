@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {AppRoute, AuthorizationStatus, NameSpace} from '../../const';
+import {AppRoute, AuthorizationStatus, FilmTabsItems, NameSpace} from '../../const';
 import {createMemoryHistory} from 'history';
 import HistoryRouter from '../history-route/history-route';
 import {makeFakeFilm, makeFakeFilms} from '../../utils/mocks';
@@ -48,10 +48,10 @@ describe('Application Routing', () => {
 
     render(fakeApp);
 
-    expect(screen.getByText(/Play/i)).toBeInTheDocument();
-    expect(screen.getByText(/My list/i)).toBeInTheDocument();
-
     expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
+
+    expect(screen.getByTestId('play')).toBeInTheDocument();
+    expect(screen.getByTestId('favorite')).toBeInTheDocument();
   });
 
   it('should render "SignInScreen" when user navigate to "/login"', () => {
@@ -61,6 +61,7 @@ describe('Application Routing', () => {
 
     expect(screen.getByPlaceholderText(/Email address/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
+
     expect(screen.getByRole('button')).toHaveTextContent(/Sign in/i);
   });
 
@@ -77,9 +78,13 @@ describe('Application Routing', () => {
 
     render(fakeApp);
 
-    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
-    expect(screen.getByText(/Details/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
+    expect(screen.getByTestId('play')).toBeInTheDocument();
+    expect(screen.getByTestId('favorite')).toBeInTheDocument();
+    expect(screen.getByTestId('review')).toBeInTheDocument();
+
+    expect(screen.getByText(FilmTabsItems.Overview)).toBeInTheDocument();
+    expect(screen.getByText(FilmTabsItems.Details)).toBeInTheDocument();
+    expect(screen.getByText(FilmTabsItems.Reviews)).toBeInTheDocument();
 
     expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
@@ -89,11 +94,11 @@ describe('Application Routing', () => {
 
     render(fakeApp);
 
+    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
+
     expect(screen.getByText(/Add review/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Review text/i)).toBeInTheDocument();
     expect(screen.getByRole('button')).toHaveTextContent(/Post/i);
-
-    expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });
 
   it('should render "PlayerScreen" when user navigate to "/player/1"', () => {
@@ -101,9 +106,9 @@ describe('Application Routing', () => {
 
     render(fakeApp);
 
-    expect(screen.getByText(/Exit/i)).toBeInTheDocument();
-    expect(screen.getByText(/Play/i)).toBeInTheDocument();
-    expect(screen.getByText(/Full screen/i)).toBeInTheDocument();
+    expect(screen.getByTestId('exit')).toBeInTheDocument();
+    expect(screen.getByTestId('play')).toBeInTheDocument();
+    expect(screen.getByTestId('fullscreen')).toBeInTheDocument();
 
     expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
   });

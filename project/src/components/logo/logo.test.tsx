@@ -1,24 +1,31 @@
 import {render, screen} from '@testing-library/react';
+import Logo from './logo';
+import {Provider} from 'react-redux';
+import HistoryRouter from '../history-route/history-route';
+import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../../components/history-route/history-route';
-import NotFoundScreen from './not-found-screen';
-import {Routes, Route} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import {Route, Routes} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
+const mockStore = configureMockStore();
 const history = createMemoryHistory();
 
-describe('Component: NotFoundScreen', () => {
+describe('Component: Logo', () => {
   it('should render correctly', () => {
+    const store = mockStore();
+
+    history.push(AppRoute.SignIn);
+
     render(
-      <HistoryRouter history={history}>
-        <NotFoundScreen/>
-      </HistoryRouter>,
+      <Provider store={store}>
+        <HistoryRouter history={history}>
+          <Logo/>
+        </HistoryRouter>
+      </Provider>,
     );
 
-    expect(screen.getByText(/404. Not Found/i)).toBeInTheDocument();
-    expect(screen.getByText(/Oh no, page is missing/i)).toBeInTheDocument();
-
-    expect(screen.getByTestId('back')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 
   it('should navigate to "/" when click to link', () => {
@@ -33,7 +40,7 @@ describe('Component: NotFoundScreen', () => {
           />
           <Route
             path='*'
-            element={<NotFoundScreen/>}
+            element={<Logo/>}
           />
         </Routes>
       </HistoryRouter>,
@@ -41,7 +48,7 @@ describe('Component: NotFoundScreen', () => {
 
     expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByTestId('back'));
+    userEvent.click(screen.getByRole('link'));
 
     expect(screen.getByText(/This is main page/i)).toBeInTheDocument();
   });

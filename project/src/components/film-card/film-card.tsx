@@ -12,6 +12,7 @@ function FilmCard({film, isActive, onHover}: FilmCardProps): JSX.Element {
   return (
     <article
       className="small-film-card catalog__films-card"
+      data-testid="film-card"
       onMouseEnter={() => onHover(film.id)}
       onMouseLeave={() => onHover(null)}
     >

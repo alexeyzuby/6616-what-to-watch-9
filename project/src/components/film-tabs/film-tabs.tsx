@@ -4,20 +4,15 @@ import {FilmComment} from '../../types/comment';
 import OverviewTab from './overview-tab';
 import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
+import {FilmTabsItems} from '../../const';
 
 type FilmTabsProps = {
   film: Film,
   comments: FilmComment[],
 };
 
-const TabsItems = {
-  Overview: 'Overview',
-  Details: 'Details',
-  Reviews: 'Reviews',
-};
-
 function FilmTabs({film, comments}: FilmTabsProps) {
-  const [current, setCurrent] = useState(TabsItems.Overview);
+  const [current, setCurrent] = useState(FilmTabsItems.Overview);
 
   const tabClickHandler = (evt: MouseEvent<HTMLAnchorElement>, tab: string) => {
     evt.preventDefault();
@@ -28,7 +23,7 @@ function FilmTabs({film, comments}: FilmTabsProps) {
     <>
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          {Object.keys(TabsItems).map((tab) => (
+          {Object.keys(FilmTabsItems).map((tab) => (
             <li key={tab} className={`film-nav__item${tab === current ? ' film-nav__item--active' : ''}`}>
               <a href="#" className="film-nav__link" onClick={(evt) => tabClickHandler(evt, tab)}>{tab}</a>
             </li>
@@ -36,9 +31,9 @@ function FilmTabs({film, comments}: FilmTabsProps) {
         </ul>
       </nav>
 
-      {current === TabsItems.Overview && <OverviewTab film={film}/>}
-      {current === TabsItems.Details && <DetailsTab film={film}/>}
-      {current === TabsItems.Reviews && <ReviewsTab comments={comments}/>}
+      {current === FilmTabsItems.Overview && <OverviewTab film={film}/>}
+      {current === FilmTabsItems.Details && <DetailsTab film={film}/>}
+      {current === FilmTabsItems.Reviews && <ReviewsTab comments={comments}/>}
     </>
   );
 }

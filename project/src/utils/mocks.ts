@@ -11,7 +11,8 @@ const RUNTIME_MAX_COUNT = 199;
 const SCORE_MAX_COUNT = 999;
 const RELEASED_DATE_START = 1960;
 const RELEASED_DATE_MAX = 62;
-const FAKE_ARRAY_LENGTH = 4;
+const FAKE_ARRAY_LENGTH = 16;
+const FAKE_GENRES_LENGTH = 8;
 
 const generateRandomName = () => `${faker.name.firstName()} ${faker.name.lastName()}`;
 
@@ -62,3 +63,4 @@ export const makeFakeUserData = (): UserData => ({
 
 export const makeFakeFilms = (): Film[] => new Array(FAKE_ARRAY_LENGTH).fill(null).map((item, index) => makeFakeFilm(++index));
 export const makeFakeComments = (): FilmComment[] => new Array(FAKE_ARRAY_LENGTH).fill(null).map((item, index) => makeFakeFilmComment(++index));
+export const makeFakeGenres = (): string[] => faker.datatype.array(FAKE_GENRES_LENGTH).map(() => faker.name.title());

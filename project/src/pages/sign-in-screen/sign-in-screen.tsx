@@ -45,6 +45,7 @@ function SignInScreen(): JSX.Element {
                 name="user-email"
                 id="user-email"
                 value={email}
+                data-testid="email"
                 onChange={({target}) => setEmail(target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -57,6 +58,7 @@ function SignInScreen(): JSX.Element {
                 name="user-password"
                 id="user-password"
                 value={password}
+                data-testid="password"
                 onChange={({target}) => setPassword(target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>

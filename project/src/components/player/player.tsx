@@ -50,7 +50,7 @@ function Player({name, link}: PlayerProps): JSX.Element {
   };
 
   return (
-    <div className="player" ref={playerRef}>
+    <div className="player" ref={playerRef} data-testid="player">
       {isLoaded ? null : <div>Loading...</div>}
       <Video
         link={link}
@@ -59,7 +59,7 @@ function Player({name, link}: PlayerProps): JSX.Element {
         setVideoDuration={setVideoDuration}
         setWatchedTime={setWatchedTime}
       />
-      <button type="button" className="player__exit" onClick={clickExitHandler}>Exit</button>
+      <button type="button" className="player__exit" data-testid="exit" onClick={clickExitHandler}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
@@ -69,14 +69,14 @@ function Player({name, link}: PlayerProps): JSX.Element {
           <div className="player__time-value">{`-${timeLeft}`}</div>
         </div>
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={() => setIsPlaying(!isPlaying)}>
+          <button type="button" className="player__play" data-testid="play" onClick={() => setIsPlaying(!isPlaying)}>
             <svg viewBox="0 0 19 19" width="19" height="19">
               {isPlaying ? <use xlinkHref="#pause"/> : <use xlinkHref="#play-s"/>}
             </svg>
             <span>Play</span>
           </button>
           <div className="player__name">{name}</div>
-          <button type="button" className="player__full-screen" onClick={() => setFullScreen(!isFullScreen)}>
+          <button type="button" className="player__full-screen" data-testid="fullscreen" onClick={() => setFullScreen(!isFullScreen)}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"/>
             </svg>

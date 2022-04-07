@@ -52,13 +52,13 @@ function PromoFilm(): JSX.Element {
               <span className="film-card__year">{promoFilm.released}</span>
             </p>
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button" onClick={clickPlayHandler}>
+              <button className="btn btn--play film-card__button" type="button" data-testid="play" onClick={clickPlayHandler}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"/>
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list film-card__button" type="button" onClick={clickFavoriteHandler}>
+              <button className="btn btn--list film-card__button" type="button" data-testid="favorite" onClick={clickFavoriteHandler}>
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
                 </svg>
