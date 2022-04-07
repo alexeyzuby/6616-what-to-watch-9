@@ -29,7 +29,7 @@ describe('Component: FilmsList', () => {
         <HistoryRouter history={history}>
           <FilmsList films={fakeFilms}/>
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getAllByTestId('film-card').length).toEqual(fakeFilms.length);

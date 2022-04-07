@@ -12,7 +12,7 @@ describe('Component: FilmTabs', () => {
       <FilmTabs
         film={fakeFilm}
         comments={fakeComments}
-      />
+      />,
     );
 
     expect(screen.getByText(FilmTabsItems.Overview)).toBeInTheDocument();

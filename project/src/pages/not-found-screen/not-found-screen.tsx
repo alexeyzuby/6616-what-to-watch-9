@@ -13,7 +13,7 @@ function NotFoundScreen(): JSX.Element {
 
       <div className="user-page__content" style={{textAlign: 'center'}}>
         <p>Oh no, page is missing!</p>
-        <Link to="/" style={{color: 'inherit'}}>Back to main page</Link>
+        <Link to="/" style={{color: 'inherit'}} data-testid="back">Back to main page</Link>
       </div>
 
       <Footer/>

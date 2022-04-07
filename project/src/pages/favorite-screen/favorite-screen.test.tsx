@@ -33,8 +33,8 @@ describe('Component: FavoriteScreen', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <FavoriteScreen/>
-        </HistoryRouter>,
-      </Provider>
+        </HistoryRouter>
+      </Provider>,
     );
 
     expect(screen.getByText(/My list/i)).toBeInTheDocument();

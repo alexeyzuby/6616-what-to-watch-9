@@ -29,8 +29,8 @@ describe('Component: AddReviewScreen', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <AddReviewScreen/>
-        </HistoryRouter>,
-      </Provider>
+        </HistoryRouter>
+      </Provider>,
     );
 
     expect(history.location.pathname).toEqual('/films/1/review');

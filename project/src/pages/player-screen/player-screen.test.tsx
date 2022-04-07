@@ -29,8 +29,8 @@ describe('Component: PlayerScreen', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <Player name={fakeFilm.name} link={fakeFilm.videoLink}/>
-        </HistoryRouter>,
-      </Provider>
+        </HistoryRouter>
+      </Provider>,
     );
 
     expect(history.location.pathname).toEqual('/player/1');

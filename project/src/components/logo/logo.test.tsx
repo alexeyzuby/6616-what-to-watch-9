@@ -5,6 +5,8 @@ import HistoryRouter from '../history-route/history-route';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import {AppRoute} from '../../const';
+import {Route, Routes} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -20,9 +22,34 @@ describe('Component: Logo', () => {
         <HistoryRouter history={history}>
           <Logo/>
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getByRole('link')).toBeInTheDocument();
+  });
+
+  it('should navigate to "/" when click to link', () => {
+    history.push('/fake');
+
+    render(
+      <HistoryRouter history={history}>
+        <Routes>
+          <Route
+            path="/"
+            element={<h1>This is main page</h1>}
+          />
+          <Route
+            path='*'
+            element={<Logo/>}
+          />
+        </Routes>
+      </HistoryRouter>,
+    );
+
+    expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('link'));
+
+    expect(screen.getByText(/This is main page/i)).toBeInTheDocument();
   });
 });

@@ -15,7 +15,7 @@ describe('Component: FilmPreview', () => {
         src={fakeFilm.videoLink}
         poster={fakeFilm.posterImage}
         isActive={false}
-      />
+      />,
     );
 
     expect(screen.getByTestId('video')).toBeInTheDocument();

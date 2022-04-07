@@ -43,3 +43,5 @@ export const INITIAL_GENRE = 'All genres';
 export const MAX_SIMILAR_COUNT = 4;
 export const INITIAL_FILMS_COUNT = 8;
 export const MAX_FILM_RATING = 10;
+export const MIN_REVIEW_LENGTH = 50;
+export const MAX_REVIEW_LENGTH = 400;

@@ -3,11 +3,8 @@ import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
 import {addCommentAction} from '../../store/api-actions';
+import {MAX_FILM_RATING, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../const';
 import RatingInput from './rating-input';
-import {MAX_FILM_RATING} from '../../const';
-
-const MIN_REVIEW_LENGTH = 50;
-const MAX_REVIEW_LENGTH = 400;
 
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(0);

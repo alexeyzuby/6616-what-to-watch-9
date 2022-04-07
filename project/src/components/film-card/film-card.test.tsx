@@ -3,6 +3,7 @@ import FilmCard from './film-card';
 import {makeFakeFilm} from '../../utils/mocks';
 import HistoryRouter from '../history-route/history-route';
 import {createMemoryHistory} from 'history';
+import userEvent from '@testing-library/user-event';
 
 const history = createMemoryHistory();
 
@@ -23,9 +24,12 @@ describe('Component: FilmCard', () => {
           isActive={false}
           onHover={cardHoverHandler}
         />
-      </HistoryRouter>
+      </HistoryRouter>,
     );
 
     expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();
+
+    userEvent.hover(screen.getByTestId('film-card'));
+    expect(cardHoverHandler).toBeCalled();
   });
 });

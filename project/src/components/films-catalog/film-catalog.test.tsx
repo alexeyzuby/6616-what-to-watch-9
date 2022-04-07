@@ -29,7 +29,7 @@ describe('Component: FilmsCatalog', () => {
         <HistoryRouter history={history}>
           <FilmsCatalog/>
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getAllByTestId('film-card').length).toBeLessThanOrEqual(INITIAL_FILMS_COUNT);

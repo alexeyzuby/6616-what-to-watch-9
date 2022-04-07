@@ -33,8 +33,8 @@ describe('Component: MainScreen', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <MainScreen/>
-        </HistoryRouter>,
-      </Provider>
+        </HistoryRouter>
+      </Provider>,
     );
 
     expect(screen.getByText(fakeFilm.name)).toBeInTheDocument();

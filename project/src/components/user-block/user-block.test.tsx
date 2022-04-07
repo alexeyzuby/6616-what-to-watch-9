@@ -22,7 +22,7 @@ describe('Component: UserBlock', () => {
         <HistoryRouter history={history}>
           <UserBlock/>
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getByRole('link')).toBeInTheDocument();

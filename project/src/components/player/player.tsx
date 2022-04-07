@@ -21,7 +21,7 @@ function Player({name, link}: PlayerProps): JSX.Element {
   const player = playerRef.current;
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isFullScreen, setFullScreen] = useState(false);
   const [videoDuration, setVideoDuration] = useState(0);
   const [watchedTime, setWatchedTime] = useState(0);
@@ -50,7 +50,7 @@ function Player({name, link}: PlayerProps): JSX.Element {
   };
 
   return (
-    <div className="player" ref={playerRef}>
+    <div className="player" ref={playerRef} data-testid="player">
       {isLoaded ? null : <div>Loading...</div>}
       <Video
         link={link}

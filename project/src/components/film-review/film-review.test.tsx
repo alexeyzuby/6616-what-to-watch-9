@@ -7,7 +7,7 @@ const fakeComment = makeFakeFilmComment();
 describe('Component: FilmReview', () => {
   it('should render correctly', () => {
     render(
-      <FilmReview comment={fakeComment}/>
+      <FilmReview comment={fakeComment}/>,
     );
 
     expect(screen.getByText(fakeComment.comment)).toBeInTheDocument();
