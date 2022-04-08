@@ -1,7 +1,7 @@
 import {Provider} from 'react-redux';
 import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../../components/history-router/history-router';
 import AddReviewScreen from './add-review-screen';
 import {createMemoryHistory} from 'history';
 import {AuthorizationStatus, NameSpace} from '../../const';

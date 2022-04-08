@@ -4,7 +4,7 @@ import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {AppRoute, AuthorizationStatus, FilmTabsItems, NameSpace} from '../../const';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import {makeFakeFilm, makeFakeFilms} from '../../utils/mocks';
 import App from './app';
 

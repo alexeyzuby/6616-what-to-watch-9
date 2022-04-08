@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import Player from './player';
 import {createMemoryHistory} from 'history';
 import {makeFakeFilm} from '../../utils/mocks';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import userEvent from '@testing-library/user-event';

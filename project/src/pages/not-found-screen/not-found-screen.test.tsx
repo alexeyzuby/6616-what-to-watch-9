@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../../components/history-router/history-router';
 import NotFoundScreen from './not-found-screen';
 import {Routes, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';

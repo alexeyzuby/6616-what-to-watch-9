@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import FilmsList from './films-list';
 import {makeFakeFilms} from '../../utils/mocks';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import {NameSpace} from '../../const';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';

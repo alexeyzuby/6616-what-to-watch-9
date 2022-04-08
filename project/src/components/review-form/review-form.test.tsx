@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import ReviewForm from './review-form';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import {MAX_FILM_RATING, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../const';

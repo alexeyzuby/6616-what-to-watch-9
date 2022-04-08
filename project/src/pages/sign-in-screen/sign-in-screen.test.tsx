@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../../components/history-router/history-router';
 import SignInScreen from './sign-in-screen';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';

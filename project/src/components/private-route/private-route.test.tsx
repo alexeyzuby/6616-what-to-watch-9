@@ -4,7 +4,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {AppRoute, AuthorizationStatus, NameSpace} from '../../const';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from './private-route';
 
 const history = createMemoryHistory();
