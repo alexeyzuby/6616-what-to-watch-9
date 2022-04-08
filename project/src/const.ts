@@ -47,6 +47,6 @@ export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 400;
 
 export const EMAIL_TEMPLATE = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-export const PASSWORD_TEMPLATE = /(?=.*\d)(?=.*[a-z])/;
+export const PASSWORD_TEMPLATE = /(?=.*\d)(?=.*[a-zA-Z])/;
 
 export const ratingValues: number[] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
