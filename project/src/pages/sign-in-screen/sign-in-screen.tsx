@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
-import {AppRoute} from '../../const';
+import {AppRoute, EMAIL_TEMPLATE, PASSWORD_TEMPLATE} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
@@ -17,8 +17,13 @@ function SignInScreen(): JSX.Element {
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
-      toast.error('Email and password cannot be empty');
+    if (!EMAIL_TEMPLATE.test(email)) {
+      toast.error('Email is not valid');
+      return;
+    }
+
+    if (!PASSWORD_TEMPLATE.test(password)) {
+      toast.error('Password must contain at least one number and letter');
       return;
     }
 
