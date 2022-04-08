@@ -6,6 +6,8 @@ import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
 import {FilmTabsItems} from '../../const';
 
+import './film-tabs.css';
+
 type FilmTabsProps = {
   film: Film,
   comments: FilmComment[],

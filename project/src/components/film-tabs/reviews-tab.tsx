@@ -2,7 +2,6 @@ import {FilmComment} from '../../types/comment';
 import FilmReview from '../film-review/film-review';
 
 const REVIEWS_COLS_COUNT = 2;
-const NO_REVIEWS_TEXT_COLOR = '#382c2a';
 
 type ReviewsTabProps = {
   comments: FilmComment[],
@@ -10,7 +9,7 @@ type ReviewsTabProps = {
 
 function ReviewsTab({comments}: ReviewsTabProps): JSX.Element {
   if (comments.length === 0) {
-    return <p style={{color: NO_REVIEWS_TEXT_COLOR}}>No reviews...</p>;
+    return <p className="film-card__empty">No reviews...</p>;
   }
 
   return (
