@@ -45,3 +45,5 @@ export const INITIAL_FILMS_COUNT = 8;
 export const MAX_FILM_RATING = 10;
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 400;
+
+export const ratingValues: number[] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];

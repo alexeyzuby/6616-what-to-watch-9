@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
 import {addCommentAction} from '../../store/api-actions';
-import {MAX_FILM_RATING, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../const';
+import {ratingValues, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../const';
 import RatingInput from './rating-input';
 
 function ReviewForm(): JSX.Element {
@@ -38,14 +38,14 @@ function ReviewForm(): JSX.Element {
     <form action="#" className="add-review__form" onSubmit={submitHandler}>
       <div className="rating">
         <div className="rating__stars">
-          {Array.from(Array(MAX_FILM_RATING), (element, index) => (
+          {ratingValues.map((element) => (
             <RatingInput
-              key={index + 1}
-              value={index + 1}
-              checked={index + 1 === rating}
+              key={element}
+              value={element}
+              checked={element === rating}
               onChange={(value) => setRating(value)}
             />
-          )).reverse()}
+          ))}
         </div>
       </div>
 
